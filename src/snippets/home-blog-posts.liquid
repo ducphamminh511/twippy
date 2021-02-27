@@ -1,0 +1,58 @@
+<div class="blog container">
+  <p class="idx-tlt">FROM THE TWIPPY BLOG</p>
+  <ul>
+    {% for article in blogs.news.articles limit:3 %}
+    <li>
+      <p class="blog-img">{% if article.image %}<img src="{{ article | img_url: 'large' }}">
+
+        {% else %}
+
+        {% assign hero_image = '' %}
+        {% assign html_tags = article.excerpt_or_content | split: '<' %}
+        {% for html_tag in html_tags %}
+        {% assign img_check = html_tag | slice: 0,3 %}
+        {% if img_check == 'img' %}
+        {% assign img_tag = html_tag | split: '>' %}
+        {% assign hero_image = '<' | append: img_tag.first | append: '>' %}
+        {% break %}
+        {% endif %}
+        {% endfor %}
+
+        {% if hero_image.size > 0 %}{{ hero_image }}
+        {%else%}
+        {{ 'twippy_logo1.png' | asset_url | img_tag: shop.name }}
+        {% endif %}          
+        {% endif %}</p>
+      <p class="blog-cate">NEWS</p>
+      <p class="blog-tlt">{{ article.title | strip_html | truncate: 40}}</p>
+      <p class="blog-txt">{{ article.content | strip_html | truncate: 180}}</p>
+      <a class="blog-more" href="{{ article.url }}">Read more</a>
+    </li>
+    {% endfor %}
+    <!--     <li>
+<p class="blog-img">{{ 'twippy_blog_img01.jpg' | asset_url | img_tag: 'title' }}</p>
+<p class="blog-cate">HOME DECOR</p>
+<p class="blog-tlt">5 Tips for Creating a Budget-Friendly <br class="pc">Gallery Wall</p>
+<p class="blog-txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. </p>
+<a class="blog-more" href="#">Read more</a>
+</li>
+<li>
+<p class="blog-img">{{ 'twippy_blog_img02.jpg' | asset_url | img_tag: 'title' }}</p>
+<p class="blog-cate">HOME DECOR</p>
+<p class="blog-tlt">5 Tips for Creating a Budget-Friendly <br class="pc">Gallery Wall</p>
+<p class="blog-txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. </p>
+<a class="blog-more" href="#">Read more</a>
+</li>
+<li>
+<p class="blog-img">{{ 'twippy_blog_img03.jpg' | asset_url | img_tag: 'title' }}</p>
+<p class="blog-cate">HOME DECOR</p>
+<p class="blog-tlt">5 Tips for Creating a Budget-Friendly <br class="pc">Gallery Wall</p>
+<p class="blog-txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. </p>
+<a class="blog-more" href="#">Read more</a>
+</li> -->
+  </ul>
+  <a class="more-btn" href="/blogs/news">MORE FROM OUR BLOGS</a>
+</div>

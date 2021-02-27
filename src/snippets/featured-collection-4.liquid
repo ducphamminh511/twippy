@@ -1,0 +1,215 @@
+{% if settings.show_featured_collection_4  %}
+    <section id="{% if settings.banner_layout_4 == 'horizontal' %}designs-horizontal{% else %}designs-vertical{% endif %}" class="featured-desktop">
+        <div class="container">
+            <div class="row">
+                {% if settings.banner_layout_4 == 'horizontal' %}
+                <div class="col-12">
+                    <a rel="nofollow" href="{{ settings.collection_link_4 }}">
+                        <div class="wrap-full-col d-flex" style="background-image: url('{{ 'collection-banner-4.jpg' | asset_url }}')">
+                            <div class="wrap-banner-content">
+                                <h3 class="font-weight-bold text-uppercase">{{ settings.collection_title_4}}</h3>
+                                <p class="font-weight-lightbold text-capitalize">{{ settings.collection_sub_title_4 }}</p>
+                                <p class="mb-0 text-capitalize font-weight-bold"><span>{{settings.collection_content_4}}</span>{% if settings.collection_content_4 != blank %}<span><i class="fas fa-chevron-right"></i></span>{% endif %}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% else %}
+                <div class="col-md-6 mb-xs">
+                    <a rel="nofollow" href="{{ settings.collection_link_4 }}">
+                        <div class="wrap-full-col d-flex" style="background-image: url('{{ 'collection-banner-4.jpg' | asset_url }}')">
+                            <div class="wrap-banner-content">
+                                <h3 class="font-weight-bold text-uppercase">{{ settings.collection_title_4}}</h3>
+                                <p class="font-weight-lightbold text-capitalize">{{ settings.collection_sub_title_4 }}</p>
+                                <p class="mb-0 text-capitalize font-weight-bold"><span>{{settings.collection_content_4}}</span>{% if settings.collection_content_4 != blank %}<span><i class="fas fa-chevron-right"></i></span>{% endif %}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+                {% if settings.product_layout_4 == 'horizontal' %}
+                </div>
+
+                <div class="row">
+                    {% for product in collections[settings.featured_collection_4].products | limit:  settings.featured_collection_products_number_4  %}
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <a rel="nofollow" href="{{ product.url }}">
+                                <div class="wrap-product">
+                                    <div class="product-img"><img class="mw-100" src="{{ product | img_url:'large' }}"></div>
+                                    <div class="product-info">
+                                        <p class="mb-0 text-capitalize">{{ product.title }}</p>
+                                    </div>
+                                    <div class="product-prices d-flex justify-content-between">
+                                        <p class="mb-0 red font-weight-bold sale"><span>{{ product.price | money_without_trailing_zeros }}</span></p>
+                                        <p class="mb-0 original"><span>{{ product.compare_at_price_max | money_without_trailing_zeros}}</span></p>
+                                        {%comment%}Loop through all the options and find out how many unique options within the variants{% endcomment %}
+                                        {% assign option_index = 0 %}
+                                        {% for option in product.options %}
+                                            {% capture downcased_option %}{{ option | downcase }}{% endcapture %}
+                                            {% assign option_index = forloop.index0 %}
+                                            {% assign is_color = false %}
+                                            {% if downcased_option contains 'color' or downcased_option contains 'colour' %}
+                                                {% assign is_color = true %}
+                                            {% endif %}
+                                            {% assign how_many_options = 0 %}
+                                            {% assign current_options = '' %}
+                                            {% for variant in product.variants %}
+                                                {% if is_color %}
+                                                    {% assign current_option = variant.options[option_index] %}
+                                                    {% unless current_options contains current_option %}
+                                                        {% if how_many_options > 0 %}
+                                                            {% assign current_options = current_options | join: '|' | append: '|' %}
+                                                        {% endif %}
+                                                    {% assign current_options = current_options | append: current_option %}
+                                                    {% assign current_options = current_options | split: '|' | sort %}
+                                                    {% assign how_many_options = current_options | size %}
+                                                    {% endunless %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if is_color %}
+                                                {%comment%}Output the amount of options for each option. Add an 's' if there is more than one available{% endcomment %}
+                                                {% unless option == "Title" %}
+                                                    <p class="mb-0 colors">{{current_options.size}} {{option}}{% if current_options.size > 1 %}s{% endif %}</p>
+                                                {% endunless %}
+                                            {% endif %}
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                    <div class="col-md-6">
+                        <div class="row">
+                {% for product in collections[settings.featured_collection_4].products | limit:  settings.featured_collection_products_number_4  %}
+                        <div class="col-sm-6 mb">
+                            <a rel="nofollow" href="{{ product.url }}">
+                                <div class="wrap-product">
+                                    <div class="product-img"><img class="mw-100" src="{{ product | img_url:'large' }}"></div>
+                                    <div class="product-info">
+                                        <p class="mb-0 text-capitalize">{{ product.title }}</p>
+                                    </div>
+                                    <div class="product-prices d-flex justify-content-between">
+                                        <p class="mb-0 red font-weight-bold sale"><span>{{ product.price | money_without_trailing_zeros }}</span></p>
+                                        <p class="mb-0 original"><span>{{ product.compare_at_price_max | money_without_trailing_zeros}}</span></p>
+                                        {%comment%}Loop through all the options and find out how many unique options within the variants{% endcomment %}
+                                        {% assign option_index = 0 %}
+                                        {% for option in product.options %}
+                                            {% capture downcased_option %}{{ option | downcase }}{% endcapture %}
+                                            {% assign option_index = forloop.index0 %}
+                                            {% assign is_color = false %}
+                                            {% if downcased_option contains 'color' or downcased_option contains 'colour' %}
+                                                {% assign is_color = true %}
+                                            {% endif %}
+                                            {% assign how_many_options = 0 %}
+                                            {% assign current_options = '' %}
+                                            {% for variant in product.variants %}
+                                                {% if is_color %}
+                                                    {% assign current_option = variant.options[option_index] %}
+                                                    {% unless current_options contains current_option %}
+                                                        {% if how_many_options > 0 %}
+                                                            {% assign current_options = current_options | join: '|' | append: '|' %}
+                                                        {% endif %}
+                                                    {% assign current_options = current_options | append: current_option %}
+                                                    {% assign current_options = current_options | split: '|' | sort %}
+                                                    {% assign how_many_options = current_options | size %}
+                                                    {% endunless %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if is_color %}
+                                                {%comment%}Output the amount of options for each option. Add an 's' if there is more than one available{% endcomment %}
+                                                {% unless option == "Title" %}
+                                                    <p class="mb-0 colors">{{current_options.size}} {{option}}{% if current_options.size > 1 %}s{% endif %}</p>
+                                                {% endunless %}
+                                            {% endif %}
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+
+                            </a>
+                        </div>
+                    {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
+        </div>
+    </section>
+    <section class="featured-mobile" style="background-image: url('{{ 'collection-banner-mobile-4.jpg' | asset_url }}')">
+        <div class="container">
+            <div class="row">
+                <h3 class="font-weight-bold text-capitalize">{{ settings.collection_title_4}}</h3>
+
+            </div>
+            <div class="wrap-product-scroll">
+                <div class="row">
+                    {% for product in collections[settings.featured_collection_4].products | limit: settings.featured_collection_products_number_4  %}
+                        <div class="col-2">
+                            <a rel="nofollow" href="{{ product.url }}">
+                                <div class="wrap-product-outer">
+                                    <div class="wrap-product">
+                                        <div class="product-img"><img class="mw-100" src="{{ product | img_url:'large' }}"></div>
+                                        <div class="product-info">
+                                            <p class="mb-0 text-capitalize">{{ product.title }}</p>
+                                        </div>
+                                        <div class="product-prices d-flex justify-content-between">
+                                            <p class="mb-0 red font-weight-bold sale"><span>{{ product.price | money_without_trailing_zeros }}</span></p>
+                                            <p class="mb-0 original"><span>{{ product.compare_at_price_max | money_without_trailing_zeros}}</span></p>
+                                            {%comment%}Loop through all the options and find out how many unique options within the variants{% endcomment %}
+                                            {% assign option_index = 0 %}
+                                            {% for option in product.options %}
+                                                {% capture downcased_option %}{{ option | downcase }}{% endcapture %}
+                                                {% assign option_index = forloop.index0 %}
+                                                {% assign is_color = false %}
+                                                {% if downcased_option contains 'color' or downcased_option contains 'colour' %}
+                                                    {% assign is_color = true %}
+                                                {% endif %}
+                                                {% assign how_many_options = 0 %}
+                                                {% assign current_options = '' %}
+                                                {% for variant in product.variants %}
+                                                    {% if is_color %}
+                                                        {% assign current_option = variant.options[option_index] %}
+                                                        {% unless current_options contains current_option %}
+                                                            {% if how_many_options > 0 %}
+                                                                {% assign current_options = current_options | join: '|' | append: '|' %}
+                                                            {% endif %}
+                                                        {% assign current_options = current_options | append: current_option %}
+                                                        {% assign current_options = current_options | split: '|' | sort %}
+                                                        {% assign how_many_options = current_options | size %}
+                                                        {% endunless %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% if is_color %}
+                                                    {%comment%}Output the amount of options for each option. Add an 's' if there is more than one available{% endcomment %}
+                                                    {% unless option == "Title" %}
+                                                        <p class="mb-0 colors">{{current_options.size}} {{option}}{% if current_options.size > 1 %}s{% endif %}</p>
+                                                    {% endunless %}
+                                                {% endif %}
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+                            </div>
+                            </a>
+
+                        </div>
+                    {% endfor %}
+                    {% if settings.featured_collection_products_number_4 != blank %}
+                        <div class="col-2">
+                            <div class="wrap-view-more">
+                                <a rel="nofollow" href="{{ settings.collection_link_4 }}">
+                                    <p class="font-weight-bold text-capitalize">view all designs</p>
+                                </a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endif %}

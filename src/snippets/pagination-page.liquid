@@ -1,0 +1,117 @@
+{% comment %}
+
+This snippet renders a custom widget based on the current 'paginate' context,
+defined in { % paginate XXXX by 5 % } tags wrapping the content.
+The example below breaks the pagination down so you can setup your own styles and behavior if you wish.
+
+Basic Pagination Usage:
+<div class="pagination">
+  {{ paginate | default_pagination }}
+</div>
+
+Replace Text:
+<div class="pagination">
+  {{ paginate | default_pagination | replace: 'Previous', 'Newer articles' | replace: 'Next', 'Older articles' }}
+</div>
+
+More information:
+- index#pagination
+- http://docs.shopify.com/themes/liquid-variables/paginate
+
+{% endcomment %}
+
+{% if settings.collection_infinite_scrolling %}
+{% if paginate.next %}    
+<div class="infinite-scrolling">
+  <a href="{{ paginate.next.url }}"  {% if settings.enable_multilang %}data-translate="collections.general.show_more"{% endif %}>
+    {{ 'collections.general.show_more' | t}}
+  </a>
+  <a href="javascript:void(0)"  class="disabled" style="display:none" {% if settings.enable_multilang %}data-translate="collections.general.no_more_product"{% endif %}>
+    {{ 'collections.general.no_more_product' | t}} 
+  </a>  
+</div>
+{% endif %}
+{% else %}
+
+{% comment %}
+<div class="toolbar toolbar-bottom navigation">
+  <p class="page-total">
+    <span {% if settings.enable_multilang %}data-translate="collections.toolbar.showing"{% endif %}>{{ 'collections.toolbar.showing' | t }}</span>: 
+    {{ paginate.current_offset | plus: 1 }} -
+    {% if paginate.next %}
+    {{ paginate.current_offset | plus: paginate.page_size }}
+    {% else %}
+    {{ paginate.items }}
+    {% endif %}
+    <span {% if settings.enable_multilang %}data-translate="collections.toolbar.of"{% endif %}>{{ 'collections.toolbar.of' | t }}</span>
+    {{ paginate.items }}
+  </p>
+  
+  <ul class="pagination-page">
+    {% if paginate.previous %}
+    <li class="text"><a href="{{ paginate.previous.url }}"  title="{{ 'collections.toolbar.previous' | t }}"  {% if settings.enable_multilang %}data-translate="collections.toolbar.previous" translate-item="title"{% endif %}><span {% if settings.enable_multilang %}data-translate="collections.toolbar.previous"{% endif %}>{{ 'collections.toolbar.previous' | t }}</span></a></li>
+    {% else %}
+    <li class="disabled"><span {% if settings.enable_multilang %}data-translate="collections.toolbar.previous"{% endif %}>{{ 'collections.toolbar.previous' | t }}</span></li>
+    {% endif %}
+
+    {% for part in paginate.parts %}
+    {% if part.is_link %}
+    <li>
+      <a href="{{ part.url }}">{{ part.title }}</a>
+    </li>
+    {% else %}
+    {% if part.title == paginate.current_page %}
+    <li class="active"><span>{{ part.title }}</span></li>
+    {% else %}
+    <li><span>{{ part.title }}</span></li>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+
+    {% if paginate.next %}
+    <li class="text"><a href="{{ paginate.next.url }}" title="{{ 'collections.toolbar.next' | t }}"  {% if settings.enable_multilang %}data-translate="collections.toolbar.next" translate-item="title"{% endif %}><span {% if settings.enable_multilang %}data-translate="collections.toolbar.next"{% endif %}>{{ 'collections.toolbar.next' | t }}</span></a></li>
+    {% else %}
+    <li class="disabled"><span {% if settings.enable_multilang %}data-translate="collections.toolbar.next"{% endif %}>{{ 'collections.toolbar.next' | t }}</span></li>
+    {% endif %}
+  </ul>
+</div>
+{% endcomment %}
+
+
+<div class="navigation pagination-page">
+    {% if paginate.previous %}
+    <div class="navigation-prev"><a href="{{ paginate.previous.url }}"><svg width="8" height="14" viewBox="0 0 8 14" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M7.70711 0.292893C8.09763 0.683417 8.09763 1.31658 7.70711 1.70711L2.41421 7L7.70711 12.2929C8.09763 12.6834 8.09763 13.3166 7.70711 13.7071C7.31658 14.0976 6.68342 14.0976 6.29289 13.7071L0.292893 7.70711C-0.0976311 7.31658 -0.0976311 6.68342 0.292893 6.29289L6.29289 0.292893C6.68342 -0.0976311 7.31658 -0.0976311 7.70711 0.292893Z"
+            fill="#302C2C" />
+      </svg></a></div>
+    {% else %}
+    <!--li class="disabled"><span {% if settings.enable_multilang %}data-translate="collections.toolbar.previous"{% endif %}>{{ 'collections.toolbar.previous' | t }}</span></li!-->
+    {% endif %}
+
+    {% for part in paginate.parts %}
+    {% if part.is_link %}
+    <div class="navigation-num"><a href="{{ part.url }}">{{ part.title }}</a></div>
+    {% else %}
+    {% if part.title == paginate.current_page %}
+    <div class="navigation-num navigation-current navigation-noclick"><a href="{{ part.url }}">{{ part.title }}</a></div>
+    {% else %}
+    <li><span>{{ part.title }}</span></li>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+
+    {% if paginate.next %}
+    <div class="navigation-next"><a href="{{ paginate.next.url }}"><svg width="8" height="14" viewBox="0 0 8 14" fill="none"
+                                                  xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M0.292893 0.292893C0.683417 -0.0976311 1.31658 -0.0976311 1.70711 0.292893L7.70711 6.29289C8.09763 6.68342 8.09763 7.31658 7.70711 7.70711L1.70711 13.7071C1.31658 14.0976 0.683417 14.0976 0.292893 13.7071C-0.0976311 13.3166 -0.0976311 12.6834 0.292893 12.2929L5.58579 7L0.292893 1.70711C-0.0976311 1.31658 -0.0976311 0.683417 0.292893 0.292893Z"
+            fill="#302C2C" />
+      </svg></a>
+    </div>
+    {% else %}
+    <!--li class="disabled"><span {% if settings.enable_multilang %}data-translate="collections.toolbar.next"{% endif %}>{{ 'collections.toolbar.next' | t }}</span></li!-->
+    {% endif %}
+</div>
+{% endif %}

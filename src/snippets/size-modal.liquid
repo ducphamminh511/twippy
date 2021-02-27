@@ -1,0 +1,1040 @@
+<script>
+  $(document).ready(function(){
+    $(window).bind(('load'),function(){
+        $('#select-box-style').on('change', function() {
+          var value = $(this).find('option:selected').attr('data-value'),
+              txtValue = $(this).find('option:selected').text(),
+              modalValue = $('.modal-content[data-id="'+value+'"]');
+          $('.modal-content').css('display','none');
+          $('.hide-select #select-guide').remove();
+          $('.size-modal-tlt,.size-modal-txt').empty();
+          if(modalValue.length == 1){
+            $('.size-modal-tlt').append(txtValue+'<span> size guide</span>');
+            modalValue.css('display','block');
+          }else{
+            $('.size-modal-txt').empty().append('<p>We are updating <b>'+txtValue+'</b> size guide. Thank you for your patience.</p>');
+          }
+      	}).trigger('change');
+    });  
+});
+</script>
+<div class="wrap-modal">
+    <div id="size-modal">
+        <div class="modal-title d-flex">
+            <div class="close-btn">
+                <a href="#">
+                    <i class="fas fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="wrap-select-box hide-select">
+            <select name="" id="select-guide">
+                <option value="UNISEX COTTON TEE" data-id="unisex-cotton-tee">UNISEX COTTON TEE</option>
+				<option value="TANK" data-id="tank">TANK</option>
+				<option value="SHORT" data-id="short">SHORT</option>
+                <option value="WOMEN'S CREW TEE" data-id="womens-crew-tee">WOMEN'S CREW TEE</option>
+                <option value="UNISEX LONG SLEEVE" data-id="unisex-long-sleeve">UNISEX LONG SLEEVE</option>
+                <option value="CREW NECK SWEATSHIRT" data-id="crew-neck-sweatshirt">CREW NECK SWEATSHIRT</option>
+                <option value="GILDAN HOODIE" data-id="gildan-hoodie">GILDAN HOODIE</option>
+                <option value="HOODIE RAGLAN SLEEVE" data-id="hoodie-raglan-sleeve">HOODIE RAGLAN SLEEVE</option>
+            </select>
+          <h4 class="size-modal-tlt" itemprop="name"></h4>
+          <div class="size-modal-txt"></div>
+        </div>
+        <div class="modal-content " data-id="unisex-cotton-tee">
+            <div class="content-top" >
+                <div class="unit">
+                    <a href="#" data-id="uct-inches" class="active" data-class=" inches">Inches</a>
+                    <a href="#" data-id="uct-centimeters" data-class="centimeters">Centimeters</a>
+                </div>
+            </div>
+            <div class="content-bottom">
+                <div id="uct-inches" class="wrap-table show">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Size</th>
+                            <th scope="col">Width</th>
+                            <th scope="col">Height</th>
+                            <th scope="col">Sleeve</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">S</th>
+                            <td>18in</td>
+                            <td>28in</td>
+                            <td>15.8in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>20in</td>
+                            <td>29in</td>
+                            <td>17in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">L</th>
+                            <td>22in</td>
+                            <td>30in</td>
+                            <td>18.5in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XL</th>
+                            <td>24in</td>
+                            <td>31in</td>
+                            <td>20in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2XL</th>
+                            <td>26in</td>
+                            <td>32in</td>
+                            <td>21.5in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3XL</th>
+                            <td>28in</td>
+                            <td>33in</td>
+                            <td>22.8in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4XL</th>
+                            <td>30in</td>
+                            <td>34in</td>
+                            <td>24.3in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5XL</th>
+                            <td>32in</td>
+                            <td>35in</td>
+                            <td>25.4in</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="uct-centimeters" class="wrap-table">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Size</th>
+                            <th scope="col">Width</th>
+                            <th scope="col">Height</th>
+                            <th scope="col">Sleeve</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">S</th>
+                            <td>45cm</td>
+                            <td>71cm</td>
+                            <td>40cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>50cm</td>
+                            <td>73cm</td>
+                            <td>43cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">L</th>
+                            <td>55cm</td>
+                            <td>76cm</td>
+                            <td>46cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XL</th>
+                            <td>60cm</td>
+                            <td>78cm</td>
+                            <td>50cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2XL</th>
+                            <td>66cm</td>
+                            <td>81cm</td>
+                            <td>54cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3XL</th>
+                            <td>71cm</td>
+                            <td>83cm</td>
+                            <td>57cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4XL</th>
+                            <td>76cm</td>
+                            <td>86cm</td>
+                            <td>61cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5XL</th>
+                            <td>81cm</td>
+                            <td>88cm</td>
+                            <td>64cm</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal-content " data-id="womens-crew-tee">
+            <div class="content-top" >
+                <div class="unit">
+                    <a href="#" data-id="wct-inches" data-class=" inches" class="active">Inches</a>
+                    <a href="#" data-id="wct-centimeters" data-class="centimeters">Centimeters</a>
+                </div>
+            </div>
+            <div class="content-bottom">
+                <div id="wct-inches" class="wrap-table show">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Size</th>
+                            <th scope="col">Width</th>
+                            <th scope="col">Height</th>
+                            <th scope="col">Sleeve</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">S</th>
+                            <td>17.25in</td>
+                            <td>25.5in</td>
+                            <td>13.25in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>19.25in</td>
+                            <td>26in</td>
+                            <td>14in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">L</th>
+                            <td>21.25in</td>
+                            <td>27in</td>
+                            <td>14.75in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XL</th>
+                            <td>23.5in</td>
+                            <td>28in</td>
+                            <td>15.75in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2XL</th>
+                            <td>25.25in</td>
+                            <td>28.5in</td>
+                            <td>16.75in</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="wct-centimeters" class="wrap-table">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Size</th>
+                            <th scope="col">Width</th>
+                            <th scope="col">Height</th>
+                            <th scope="col">Sleeve</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">S</th>
+                            <td>43cm</td>
+                            <td>64cm</td>
+                            <td>33cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>48cm</td>
+                            <td>66cm</td>
+                            <td>35cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">L</th>
+                            <td>53cm</td>
+                            <td>68cm</td>
+                            <td>37cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XL</th>
+                            <td>59cm</td>
+                            <td>71cm</td>
+                            <td>40cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2XL</th>
+                            <td>64cm</td>
+                            <td>72cm</td>
+                            <td>42cm</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal-content " data-id="unisex-long-sleeve">
+            <div class="content-top" >
+                <div class="unit">
+                    <a href="#" data-id="uls-inches" class="active" data-class=" inches">Inches</a>
+                    <a href="#" data-id="uls-centimeters" data-class="centimeters">Centimeters</a>
+                </div>
+            </div>
+            <div class="content-bottom">
+                <div id="uls-inches" class="wrap-table show">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Size</th>
+                            <th scope="col">Width</th>
+                            <th scope="col">Height</th>
+                            <th scope="col">Sleeve</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">S</th>
+                            <td>18in</td>
+                            <td>28in</td>
+                            <td>33.5in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>20in</td>
+                            <td>29in</td>
+                            <td>35in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">L</th>
+                            <td>22in</td>
+                            <td>30in</td>
+                            <td>36.5in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XL</th>
+                            <td>24in</td>
+                            <td>31in</td>
+                            <td>38in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2XL</th>
+                            <td>26in</td>
+                            <td>32in</td>
+                            <td>39.5in</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div id="uls-centimeters" class="wrap-table">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Size</th>
+                            <th scope="col">Width</th>
+                            <th scope="col">Height</th>
+                            <th scope="col">Sleeve</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">S</th>
+                            <td>45cm</td>
+                            <td>71cm</td>
+                            <td>85cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>50cm</td>
+                            <td>73cm</td>
+                            <td>88cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">L</th>
+                            <td>55cm</td>
+                            <td>76cm</td>
+                            <td>92cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XL</th>
+                            <td>60cm</td>
+                            <td>78cm</td>
+                            <td>96cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2XL</th>
+                            <td>66cm</td>
+                            <td>81cm</td>
+                            <td>100cm</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal-content " data-id="crew-neck-sweatshirt">
+            <div class="content-top" >
+                <div class="unit">
+                    <a href="#" data-id="cns-inches" class="active" data-class=" inches">Inches</a>
+                    <a href="#" data-id="cns-centimeters" data-class="centimeters">Centimeters</a>
+                </div>
+            </div>
+            <div class="content-bottom">
+                <div id="cns-inches" class="wrap-table show">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Size</th>
+                            <th scope="col">Width</th>
+                            <th scope="col">Height</th>
+                            <th scope="col">Sleeve</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">S</th>
+                            <td>20in</td>
+                            <td>26in</td>
+                            <td>33in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>22in</td>
+                            <td>27in</td>
+                            <td>34in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">L</th>
+                            <td>24in</td>
+                            <td>28in</td>
+                            <td>35in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XL</th>
+                            <td>26in</td>
+                            <td>29in</td>
+                            <td>36in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2XL</th>
+                            <td>28in</td>
+                            <td>30in</td>
+                            <td>37in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3XL</th>
+                            <td>30in</td>
+                            <td>31in</td>
+                            <td>38in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4XL</th>
+                            <td>32in</td>
+                            <td>32in</td>
+                            <td>39in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5XL</th>
+                            <td>34in</td>
+                            <td>33in</td>
+                            <td>40in</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="cns-centimeters" class="wrap-table">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Size</th>
+                            <th scope="col">Width</th>
+                            <th scope="col">Height</th>
+                            <th scope="col">Sleeve</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">S</th>
+                            <td>50cm</td>
+                            <td>66cm</td>
+                            <td>83cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>55cm</td>
+                            <td>68cm</td>
+                            <td>86cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">L</th>
+                            <td>60cm</td>
+                            <td>71cm</td>
+                            <td>88cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XL</th>
+                            <td>66cm</td>
+                            <td>73cm</td>
+                            <td>91cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2XL</th>
+                            <td>71cm</td>
+                            <td>76cm</td>
+                            <td>93cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3XL</th>
+                            <td>76cm</td>
+                            <td>78cm</td>
+                            <td>96cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4XL</th>
+                            <td>81cm</td>
+                            <td>81cm</td>
+                            <td>99cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5XL</th>
+                            <td>86cm</td>
+                            <td>83cm</td>
+                            <td>101cm</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal-content " data-id="gildan-hoodie">
+            <div class="content-top" >
+                <div class="unit">
+                    <a href="#" data-id="gh-inches" class="active" data-class=" inches">Inches</a>
+                    <a href="#" data-id="gh-centimeters" data-class="centimeters">Centimeters</a>
+                </div>
+            </div>
+            <div class="content-bottom">
+                <div id="gh-inches" class="wrap-table show">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Size</th>
+                            <th scope="col">Width</th>
+                            <th scope="col">Height</th>
+                            <th scope="col">Sleeve</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">S</th>
+                            <td>20in</td>
+                            <td>26in</td>
+                            <td>33in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>22in</td>
+                            <td>27in</td>
+                            <td>34in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">L</th>
+                            <td>24in</td>
+                            <td>28in</td>
+                            <td>35in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XL</th>
+                            <td>26in</td>
+                            <td>29in</td>
+                            <td>36in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2XL</th>
+                            <td>28in</td>
+                            <td>30in</td>
+                            <td>37in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3XL</th>
+                            <td>30in</td>
+                            <td>31in</td>
+                            <td>38in</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="gh-centimeters" class="wrap-table">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Size</th>
+                            <th scope="col">Width</th>
+                            <th scope="col">Height</th>
+                            <th scope="col">Sleeve</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">S</th>
+                            <td>50cm</td>
+                            <td>66cm</td>
+                            <td>83cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>55cm</td>
+                            <td>68cm</td>
+                            <td>86cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">L</th>
+                            <td>60cm</td>
+                            <td>71cm</td>
+                            <td>88cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XL</th>
+                            <td>66cm</td>
+                            <td>73cm</td>
+                            <td>91cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2XL</th>
+                            <td>71cm</td>
+                            <td>76cm</td>
+                            <td>93cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3XL</th>
+                            <td>76cm</td>
+                            <td>78cm</td>
+                            <td>96cm</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+      <div class="modal-content " data-id="hoodie-raglan-sleeve">
+            <div class="content-top" >
+                <div class="unit">
+                    <a href="#" data-id="hrs-inches" data-class=" inches" class="active">Inches</a>
+                    <a href="#" data-id="hrs-centimeters" data-class="centimeters">Centimeters</a>
+                </div>
+            </div>
+            <div class="content-bottom">
+                <div id="hrs-inches" class="wrap-table show">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Size</th>
+                            <th scope="col">Length</th>
+                            <th scope="col">Burst(round)</th>
+                            <th scope="col">Shoulder</th>
+                            <th scope="col">Sleeve</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">S</th>
+                            <td>26in</td>
+                            <td>40in</td>
+                            <td>17in</td>
+                            <td>26in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>28in</td>
+                            <td>44in</td>
+                            <td>18in</td>
+                            <td>27in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">L</th>
+                            <td>28in</td>
+                            <td>48in</td>
+                            <td>19in</td>
+                            <td>27in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XL</th>
+                            <td>30in</td>
+                            <td>52in</td>
+                            <td>20in</td>
+                            <td>28in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2XL</th>
+                            <td>30in</td>
+                            <td>56in</td>
+                            <td>21in</td>
+                            <td>28in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3XL</th>
+                            <td>31in</td>
+                            <td>60in</td>
+                            <td>22in</td>
+                            <td>28in</td>
+                        </tr>  
+                        <tr>
+                            <th scope="row">4XL</th>
+                            <td>32in</td>
+                            <td>64in</td>
+                            <td>24in</td>
+                            <td>28in</td>
+                        </tr>    
+                        <tr>
+                            <th scope="row">5XL</th>
+                            <td>33in</td>
+                            <td>68in</td>
+                            <td>25in</td>
+                            <td>29in</td>
+                        </tr>      
+                        </tbody>
+                    </table>
+                </div>
+                <div id="hrs-centimeters" class="wrap-table">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Size</th>
+                            <th scope="col">Length</th>
+                            <th scope="col">Burst(round)</th>
+                            <th scope="col">Shoulder</th>
+                            <th scope="col">Sleeve</th>
+                          </tr> 
+                        </thead>                           
+                        <tbody>  
+                         <tr>
+                            <th scope="row">S</th>
+                            <td>67cm</td>
+                            <td>102cm</td>
+                            <td>42cm</td>
+                            <td>67cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>70cm</td>
+                            <td>112cm</td>
+                            <td>45cm</td>
+                            <td>68cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">L</th>
+                            <td>72cm</td>
+                            <td>122cm</td>
+                            <td>48cm</td>
+                            <td>69cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XL</th>
+                            <td>75cm</td>
+                            <td>132cm</td>
+                            <td>51cm</td>
+                            <td>70cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2XL</th>
+                            <td>76cm</td>
+                            <td>142cm</td>
+                            <td>54cm</td>
+                            <td>71cm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3XL</th>
+                            <td>79cm</td>
+                            <td>152cm</td>
+                            <td>57cm</td>
+                            <td>71cm</td>
+                        </tr>  
+                        <tr>
+                            <th scope="row">4XL</th>
+                            <td>82cm</td>
+                            <td>162cm</td>
+                            <td>60cm</td>
+                            <td>72cm</td>
+                        </tr>    
+                        <tr>
+                            <th scope="row">5XL</th>
+                            <td>85cm</td>
+                            <td>172cm</td>
+                            <td>63cm</td>
+                            <td>73cm</td>
+                        </tr>      
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+      <div class="modal-content " data-id="short">
+            <div class="content-top" >
+                <div class="unit">
+                    <a href="#" data-id="gh-inches" class="active" data-class=" inches">Inches</a>
+                    <a href="#" data-id="gh-centimeters" data-class="centimeters">Centimeters</a>
+                </div>
+            </div>
+            <div class="content-bottom">
+                <div id="gh-inches" class="wrap-table show">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Size</th>
+                            <th scope="col">Waist</th>
+                            <th scope="col">Length</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">S</th>
+                            <td>23.5-26in</td>
+                            <td>9.8in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>26-29in</td>
+                            <td>10.2in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">L</th>
+                            <td>29-31.5in</td>
+                            <td>10.6in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XL</th>
+                            <td>31.5-34.5in</td>
+                            <td>11in</td>
+                        </tr>  
+                        <tr>
+                            <th scope="row">2XL</th>
+                            <td>34.5-38.5in</td>
+                            <td>11.2in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3XL</th>
+                            <td>38.5-42.5in</td>
+                            <td>11.4in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4XL</th>
+                            <td>42.5-46.5in</td>
+                            <td>11.8in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5XL</th>
+                            <td>46.5-50.5in</td>
+                            <td>12in</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="gh-centimeters" class="wrap-table">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Size</th>
+                            <th scope="col">Waist</th>
+                            <th scope="col">Length</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">S</th>
+                            <td>23.5-26in</td>
+                            <td>9.8in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>26-29in</td>
+                            <td>10.2in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">L</th>
+                            <td>29-31.5in</td>
+                            <td>10.6in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XL</th>
+                            <td>31.5-34.5in</td>
+                            <td>11in</td>
+                        </tr>  
+                        <tr>
+                            <th scope="row">2XL</th>
+                            <td>34.5-38.5in</td>
+                            <td>11.2in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3XL</th>
+                            <td>38.5-42.5in</td>
+                            <td>11.4in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4XL</th>
+                            <td>42.5-46.5in</td>
+                            <td>11.8in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5XL</th>
+                            <td>46.5-50.5in</td>
+                            <td>12in</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+      <div class="modal-content " data-id="tank">
+            <div class="content-top" >
+                <div class="unit">
+                    <a href="#" data-id="gh-inches" class="active" data-class=" inches">Inches</a>
+                    <a href="#" data-id="gh-centimeters" data-class="centimeters">Centimeters</a>
+                </div>
+            </div>
+            <div class="content-bottom">
+                <div id="gh-inches" class="wrap-table show">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Size</th>
+                            <th scope="col">Bust</th>
+                            <th scope="col">Sleeve</th>
+							<th scope="col">Shoulder</th>
+                            <th scope="col">Length</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">S</th>
+                            <td>36.2in</td>
+                            <td>9.2in</td>
+							<td>16.3in</td>
+                            <td>28.3in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>38.5in</td>
+                            <td>9.4in</td>
+							<td>16.9in</td>
+                            <td>29.5in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">L</th>
+                            <td>41in</td>
+                            <td>9.6in</td>
+                          	<td>17.5in</td>
+                            <td>30.5in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XL</th>
+                            <td>43.3in</td>
+                            <td>9.8in</td>
+							<td>18.3in</td>	
+                            <td>31.4in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2XL</th>
+                            <td>45.6in</td>
+                            <td>10in</td>
+                          	<td>18.9in</td>
+                            <td>32.2in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3XL</th>
+                            <td>48in</td>
+                            <td>10.2in</td>
+                          	<td>19.3in</td>
+                            <td>33.4in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4XL</th>
+                            <td>50.4in</td>
+                            <td>10.4in</td>
+                          	<td>19.8in</td>
+                            <td>34.2in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5XL</th>
+                            <td>52.7in</td>
+                            <td>10.6in</td>
+                          	<td>20.4in</td>
+                            <td>35in</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="gh-centimeters" class="wrap-table">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Size</th>
+                            <th scope="col">Bust</th>
+                            <th scope="col">Sleeve</th>
+							<th scope="col">Shoulder</th>
+                            <th scope="col">Length</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">S</th>
+                            <td>36.2in</td>
+                            <td>9.2in</td>
+							<td>16.3in</td>
+                            <td>28.3in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>38.5in</td>
+                            <td>9.4in</td>
+							<td>16.9in</td>
+                            <td>29.5in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">L</th>
+                            <td>41in</td>
+                            <td>9.6in</td>
+                          	<td>17.5in</td>
+                            <td>30.5in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XL</th>
+                            <td>43.3in</td>
+                            <td>9.8in</td>
+							<td>18.3in</td>	
+                            <td>31.4in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2XL</th>
+                            <td>45.6in</td>
+                            <td>10in</td>
+                          	<td>18.9in</td>
+                            <td>32.2in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3XL</th>
+                            <td>48in</td>
+                            <td>10.2in</td>
+                          	<td>19.3in</td>
+                            <td>33.4in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4XL</th>
+                            <td>50.4in</td>
+                            <td>10.4in</td>
+                          	<td>19.8in</td>
+                            <td>34.2in</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5XL</th>
+                            <td>52.7in</td>
+                            <td>10.6in</td>
+                          	<td>20.4in</td>
+                            <td>35in</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

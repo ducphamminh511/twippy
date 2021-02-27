@@ -1,0 +1,1 @@
+(function(){if(void 0!=window.tkfy||1==window.tkfy)return!0;var a=document.createElement("script");a.src="https://trackifyx.redretarget.com/pull/witchcraft101.myshopify.com/hook.js";a.async=!0;var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b);!0})();

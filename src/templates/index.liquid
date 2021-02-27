@@ -1,0 +1,138 @@
+<div class="page-home">
+
+  {%comment%}
+  {% comment  %} Block Banner {% endcomment %}
+  {% include 'home-banner' %}
+
+  {% comment  %} Recommended Section {% endcomment %}
+  {% include 'home-recommended' %}
+
+  {% comment  %} Top Categories {% endcomment %}
+  {% include 'home-top-categories' %}
+
+  {% comment  %} Featured Collection {% endcomment %}
+  {% include 'featured-collection' %}
+  {% include 'featured-collection-2' %}
+  {% include 'featured-collection-3' %}
+  {% include 'featured-collection-4' %}
+  {% include 'featured-collection-5' %}
+  {% include 'featured-collection-6' %}
+  {% include 'featured-collection-7' %}
+  {% include 'featured-collection-8' %}
+
+</div>
+{%endcomment%}
+<div class="mainvisual">
+  
+  <ul class="idx-slider">
+    
+    <li><a href="{{settings.top-banner-link-1}}" style="background-image:url('{{ settings.top-banner-home-1 | img_url: 'master' }}')"​​​​​​></a></li>
+    <li><a href="{{settings.top-banner-link-2}}" style="background-image:url('{{ settings.top-banner-home-2 | img_url: 'master' }}')"></a></li>
+    <li><a href="{{settings.top-banner-link-3}}" style="background-image:url('{{ settings.top-banner-home-3 | img_url: 'master' }}')"></a></li>
+  </ul>
+</div>
+<main id="main">
+  <div id="content">
+    {% include 'home-recommended' %}
+    <div class="collections" style="background-image:url('{{ settings.home_collection_background | img_url: 'master' }}')"​​​​​​>
+      <div class="container">
+        <p class="idx-tlt">Collections</p>
+        <div class="pc">
+          <ul>
+            <li style="background-image:url('{{ settings.left_vertical_collection_banner | img_url: 'master' }}')">
+              <a href="{{settings.left_vertical_collection_link}}" style="margin: 0px; display: block; width: 100%; height: 100%;"></a>
+              <!-- <p class="collections-tlt">HOME DECORATION<br>FOR CHRISTMAS</p> -->
+              <!-- <a class="shop-btn" href="#">Shop Now</a> -->
+            </li>
+            <li style="background-image:url('{{ settings.top_right_collection_banner | img_url: 'master' }}')">
+              <a href="{{settings.top_right_collection_link}}" style="margin: 0px; display: block; width: 100%; height: 100%;"></a>
+              <!-- <p class="collections-tlt">HOME DECORATION<br>FOR CHRISTMAS</p> -->
+              <!-- <a class="shop-btn" href="#">Shop Now</a> -->
+            </li>
+            <li style="background-image:url('{{ settings.bottom_right_collection_banner | img_url: 'master' }}')">
+              <a href="{{settings.bottom_right_collection_link}}" style="margin: 0px; display: block; width: 100%; height: 100%;"></a>
+              <!-- <p class="collections-tlt">HOME DECORATION<br>FOR CHRISTMAS</p> -->
+              <!-- <a class="shop-btn" href="#">Shop Now</a> -->
+            </li>
+          </ul>
+        </div>
+        
+        <div class="sp">
+          <ul>
+            <li style="background-image:url('{{ settings.mobile_left_vertical_collection_banner | img_url: 'master' }}')">
+              <a href="{{settings.left_vertical_collection_link}}" style="margin: 0px; display: block; width: 100%; height: 100%;"></a>
+              <!-- <p class="collections-tlt">HOME DECORATION<br>FOR CHRISTMAS</p> -->
+              <!-- <a class="shop-btn" href="#">Shop Now</a> -->
+            </li>
+            <li style="background-image:url('{{ settings.mobile_top_right_collection_banner | img_url: 'master' }}')">
+              <a href="{{settings.top_right_collection_link}}" style="margin: 0px; display: block; width: 100%; height: 100%;"></a>
+              <!-- <p class="collections-tlt">HOME DECORATION<br>FOR CHRISTMAS</p> -->
+              <!-- <a class="shop-btn" href="#">Shop Now</a> -->
+            </li>
+            <li style="background-image:url('{{ settings.mobile_bottom_right_collection_banner | img_url: 'master' }}')">
+              <a href="{{settings.bottom_right_collection_link}}" style="margin: 0px; display: block; width: 100%; height: 100%;"></a>
+              <!-- <p class="collections-tlt">HOME DECORATION<br>FOR CHRISTMAS</p> -->
+              <!-- <a class="shop-btn" href="#">Shop Now</a> -->
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="category-list container">
+      <p class="idx-tlt">MORE PRODUCTS? CHECK THIS OUT</p>
+      <ul>
+        {%- for i in (1..10) -%}
+        {% capture collection %}category_collection_{{ i }}{% endcapture %}
+        {% capture background %}category_collection_{{ i }}_background{% endcapture %}
+        {% if settings[collection] %}
+        <li><a href="{{collections[settings[collection]].url}}" style="background-image:url('{{ settings[background] | img_url: 'master' }}')">{{ collections[settings[collection]].title }}</a></li>
+        {%endif%}
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="customer container">
+      <p class="idx-tlt">OUR CUSTOMERS</p>
+      <ul>
+        {% for i in (1..3) %}
+          {% capture image %}review_{{ i }}_image{% endcapture %}
+          {% capture comment %}review_{{ i }}_content{% endcapture %}
+          {% capture stars %}review_{{ i }}_star{% endcapture %}
+          {% capture customer_name %}review_{{ i }}_customer_name{% endcapture %}
+          {% capture date %}review_{{ i }}_date{% endcapture %}
+          <li>
+            <div class="purchased">
+              <div class="purchased-img">{{ 'twippy_customer_img01.jpg' | asset_url | img_tag: 'name' }}</div>
+              <div class="purchased-info">
+                <p class="purchased-tlt">Purchased item:</p>
+                <p class="purchased-txt">0% Irish Here For The Beer Funny St. Patrick's Day Drinking
+                  Team Hoodie</p>
+              </div>
+            </div>
+            <p class="customer-img">
+              <img src="{{ settings[image] | img_url: '1600x'}}" >
+            </p>
+            <div class="customer-info">
+              <p class="customer-stars">
+                {% for i in (1..settings[stars])%}
+                  <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                    <path
+                          d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z"
+                          fill="#FFBE40" />
+                  </svg>
+                {%endfor%}
+               
+              </p>
+              <p class="customer-txt">
+                {{settings[comment]}}
+              </p>
+              <p class="customer-name">{{settings[customer_name]}}</p>
+              <p class="customer-date">{{settings[date]}}</p>
+            </div>
+          </li>
+        {%endfor%}
+      </ul>
+    </div>
+    {% include 'home-blog-posts' %}
+  </div>
+</main>

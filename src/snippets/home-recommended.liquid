@@ -1,0 +1,14 @@
+<div class="trending container">
+  <p class="idx-tlt">{{settings.recommended_section_title}}</p>
+  <ul class="product-list">
+    {% for product in collections[settings.recommended_collection].products | limit: settings.recommended_products_number %}
+    <li><a href="{{ product.url }}">
+      <span class="sale">sale<span>70%</span></span>
+      <p class="product-img"><img src="{{ product | img_url:'large' }}" alt="{{ product.title }}"></p>
+      <p class="product-tlt">{{ product.title }}</p>
+      <p class="product-price">{{ product.price | money_without_trailing_zeros }}<span>{{ product.compare_at_price_max | money_without_trailing_zeros}}</span></p>
+      </a></li>
+    {% endfor %}
+  </ul>
+  <a class="more-btn" href="{{collections[settings.recommended_collection].url}}">SEE MORE</a>
+</div>

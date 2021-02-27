@@ -1,0 +1,50 @@
+<div class="under-mainvisual">
+  <div class="container">
+    <h2 class="under-h2">Clothing</h2>
+  </div>
+</div>
+{% include 'breadcrumb' %}
+
+{% if settings.collection_results_per_page != blank %}
+{% assign product_per_page = settings.collection_results_per_page %}
+{% else %}
+{% assign product_per_page = 12 %}
+{% endif %}
+<div class="page-category">
+  <div class="page-content">
+    <div class="clothing-content container">
+      {% include 'collection-sidebar' %}
+      {% paginate collection.products by product_per_page %}
+      <div class="clothing-list col-main">
+        {% include 'collection-header' %}
+
+        <ul class="content-right product-list">
+          {% if collection.products.size > 0 %}
+          {% if settings.collection_results_per_row != blank and settings.collection_results_per_row != '5' %}
+          {% assign product_grid = 12 | divided_by: settings.collection_results_per_row %}
+          {% assign columns = true %}
+          {% endif %}
+
+          {% for product in collection.products %}
+          
+          {% include 'product-twippy-item' %}
+          
+          {% endfor %}
+          {% else %}
+          <p class="text-center" {% if settings.enable_multilang %}data-translate="collections.general.no_matches"{% endif %}>{{ 'collections.general.no_matches' | t }}</p>
+          {% endif %}
+        </ul>
+
+        {% if paginate.pages > 1 %}
+        <div class="padding">
+          {% include 'pagination-page' %}
+          
+        </div>
+        {% endif %}
+
+      </div>
+
+      {% endpaginate %}
+    </div>
+  </div>
+</div>

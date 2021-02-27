@@ -1,0 +1,119 @@
+{%comment%}
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="wrap-footer">
+          <div class="footer-top d-flex justify-content-between">
+            <div class="f-footer">
+                {% include 'footer-nav' %}
+            </div>
+            <div class="f-lang">
+              <div class="change-language wrap-select-box">
+               
+                <select id="lang-switcher">
+                    <option value="1">{{ settings.lange_1 }}</option>
+                    <option value="2">{{ settings.lange_2 }}</option>
+                  </select>
+                <script>
+                    if(window.translator){
+                        translator.updateLangSwitcher();
+
+                    }
+                  jQuery('#lang-switcher').selectize();
+                </script>
+                <style>        
+                .selectize-control div[data-value~="1"] {background: url({{ "i-lang-1.png" | asset_url }}) no-repeat;}        
+                .selectize-control div[data-value~="2"] {background: url({{ "i-lang-2.png" | asset_url }}) no-repeat;}        
+                </style>
+                
+              </div>
+              <div class="change-currency wrap-select-box">
+               {% include 'new-currency-picker' %}
+              </div>
+              <ul class="f-payment">
+                <li><img alt="Visa" style="height:24px;width:37px;margin:4px;" src="{{ 'visa-icon.svg' | asset_url }}"></li>
+                <li><img alt="Master Card" style="height:24px;width:37px;margin:4px;" src="{{ 'mastercard-icon.svg' | asset_url }}"></li>
+                <li><img alt="American Express" style="height:24px;width:37px;margin:4px;" src="{{ 'amex-icon.svg' | asset_url }}"></li>
+                <li><img alt="Discover" style="height:24px;width:37px;margin:4px;" src="{{ 'discover-icon.svg' | asset_url }}"></li>
+                <li><img alt="Paypal" style="height:24px;width:37px;margin:4px;" src="{{ 'paypal-icon.svg' | asset_url }}"></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bottom d-flex justify-content-between">
+             {% if settings.display_footer_socket and settings.footer_socket_code != blank %}
+                {% if settings.enable_multilang %}
+                  {{ settings.footer_socket_code | split: '|' | first }}
+                  {{ settings.footer_socket_code | split: '|' | last }}
+                {% else %}
+                  {{ settings.footer_socket_code | split: '|' | first }}
+                {% endif %}
+              {% endif %}
+          </div>
+        </div>
+  </div>
+</footer>
+{%endcomment%}
+
+<div id="footer" style="background-image:url('{{ settings.custome_footer_background | img_url: 'master' }}')">
+			<a href="#wrapper" class="totop">back to top</a>
+			<div class="f-top container">
+				<div class="f-menu">
+                  {% include 'footer-nav' %}
+				</div>
+				<div class="select-menu">
+					<div class="custom-select-wrapper select-lang">
+						<div class="twippy-custom-select">
+							<div class="custom-select__trigger"><span>{{ 'twippy_us_flag.png' | asset_url | img_tag: 'English' }}EN</span>
+								<div class="arrow"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"
+										xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd" clip-rule="evenodd"
+											d="M5.41252 5.1624C5.18471 5.3902 4.81537 5.3902 4.58756 5.1624L1.08756 1.6624C0.859755 1.43459 0.859755 1.06524 1.08756 0.837438C1.31537 0.609632 1.68471 0.609632 1.91252 0.837438L5.00004 3.92496L8.08756 0.837438C8.31537 0.609632 8.68471 0.609632 8.91252 0.837439C9.14033 1.06524 9.14033 1.43459 8.91252 1.6624L5.41252 5.1624Z"
+											fill="#fff" /></svg></div>
+							</div>
+							<div class="custom-options">
+								<span class="custom-option selected" data-value="en">{{ 'twippy_us_flag.png' | asset_url | img_tag: 'English' }}English</span>
+								<span class="custom-option" data-value="ge">{{ 'twippy_ger_flag.png' | asset_url | img_tag: 'German' }}German</span>
+							</div>
+						</div>
+					</div>
+					<div class="custom-select-wrapper select-currency">
+						<div class="twippy-custom-select">
+							<div class="custom-select__trigger"><span>USD</span>
+								<div class="arrow"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"
+										xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd" clip-rule="evenodd"
+											d="M5.41252 5.1624C5.18471 5.3902 4.81537 5.3902 4.58756 5.1624L1.08756 1.6624C0.859755 1.43459 0.859755 1.06524 1.08756 0.837438C1.31537 0.609632 1.68471 0.609632 1.91252 0.837438L5.00004 3.92496L8.08756 0.837438C8.31537 0.609632 8.68471 0.609632 8.91252 0.837439C9.14033 1.06524 9.14033 1.43459 8.91252 1.6624L5.41252 5.1624Z"
+											fill="#fff" /></svg></div>
+							</div>
+							<div class="custom-options">
+								<span class="custom-option selected" data-value="usd">USD $</span>
+								<span class="custom-option" data-value="eur">EUR €</span>
+								<span class="custom-option" data-value="gbp">GBP £</span>
+								<span class="custom-option" data-value="brl">BRL R$</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="f-contact">
+					<p class="contact-us">CONTACT US</p>
+					<ul>
+						<li><a href="#"><svg width="19" height="40" viewBox="0 0 19 40" fill="none"
+									xmlns="http://www.w3.org/2000/svg">
+									<path
+										d="M17.6947 19.9632H12.2256V40H3.93624V19.9632H0V12.9246H3.93624V8.36297C3.93624 5.10117 5.49356 0 12.2992 0L18.4427 0.0245248V6.86695H13.9914C13.0595 6.8179 12.2624 7.52912 12.2134 8.46107C12.2134 8.57143 12.2134 8.68179 12.2256 8.77989V12.9123H18.4182L17.6947 19.9632Z"
+										fill="white" />
+								</svg>
+							</a></li>
+					</ul>
+					<div class="hot-line">
+						<p>Email: <a href="mailto:support@twippy.co">support@twippy.co</a></p>
+						<p>Hotline: <a href="tel:0000000000">0000000000</a></p>
+					</div>
+					<p class="paypal">{{ 'twippy_paypal.png' | asset_url | img_tag: 'Paypal' }}</p>
+				</div>
+			</div>
+			<p class="f-copy">© 2020 Twippy<br class="sp"><span class="pc-text"> - </span>1300 Rosa Parks Blvd. Detroit,
+				MI 48324</p>
+		</div>
+{% comment %}
+{% include 'message-modal' %}
+{% endcomment %}
