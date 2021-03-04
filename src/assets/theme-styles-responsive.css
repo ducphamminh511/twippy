@@ -198,7 +198,7 @@
   .site-nav > li:hover > a.current > span:first-child, 
   .site-nav > li > a.current > span:first-child { border: 0; }
   .site-nav a { white-space: normal; }
-  .cbp-spmenu { background: url(//cdn.shopify.com/s/files/1/0333/5166/3748/t/5/assets/box-shadow-mobile.png?v=10569823056382434562) right 0 repeat-y #fff; }
+  .cbp-spmenu { background: url(//cdn.shopify.com/s/files/1/0538/3644/7928/t/4/assets/box-shadow-mobile.png?v=10569823056382434562) right 0 repeat-y #fff; }
   .cbp-spmenu .site-nav > li > a { font-size: 13px; font-weight: 700; color: #000; padding: 12px 20px; margin: 0; border-bottom: 1px solid #e5e5e5; }
 
   .cbp-spmenu .site-nav > li.dropdown.open > a {position: relative;}
@@ -229,7 +229,7 @@
   .site-nav > li.dropdown ul p.toogleClick.mobile-toggle-open:before { top: 10px; }
   .site-nav-dropdown .col-1 .inner p.toogleClick:before,
   .site-nav > li.dropdown ul p.toogleClick:before { display: block; content:""; position: absolute; right: 0; top: -15px!important; width: 20px; height: 40px; }
-  .site-nav-dropdown p.toogleClick { background: url(//cdn.shopify.com/s/files/1/0333/5166/3748/t/5/assets/icon-megamenu.png?v=10049381669916343834) no-repeat; padding: 0; width: 8px; height: 8px; right: 0; top: 18px; z-index: 2; }
+  .site-nav-dropdown p.toogleClick { background: url(//cdn.shopify.com/s/files/1/0538/3644/7928/t/4/assets/icon-megamenu.png?v=10049381669916343834) no-repeat; padding: 0; width: 8px; height: 8px; right: 0; top: 18px; z-index: 2; }
   .site-nav-dropdown .col-1 .inner p.toogleClick { display: block!important; }
   .site-nav > li.dropdown ul p.toogleClick.mobile-toggle-open,
   .site-nav-dropdown .col-1 .inner p.toogleClick.mobile-toggle-open { background-position: center bottom; height: 4px; }
