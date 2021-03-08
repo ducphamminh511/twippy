@@ -1,584 +1,308 @@
 {% include 'message-modal' %}{% include 'breadcrumb' %}
 <div class="product-detail container">
-        <div itemscope itemtype="http://schema.org/Product" class="product">
-            <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
-            <meta itemprop="image" content="{{ product.featured_image.src | product_img_url: 'grande' }}">
-            <div class="product-main">
-              
-              <div class="product-shop product-shop-sp">
+    <div itemscope itemtype="http://schema.org/Product" class="product">
+        <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+        <meta itemprop="image" content="{{ product.featured_image.src | product_img_url: 'grande' }}">
+        <div class="product-main">
+
+            <div class="product-shop product-shop-sp">
                 <div class="wrap-product-detail">
-                    <header class="product-title product-name {% if collection.previous_product or collection.next_product and settings.display_prev_next_product and collection %}has-btn{% endif %}">
-                    <h2 itemprop="name">
-                    {% if settings.enable_multilang %}
-                        <span class="lang1">{{ product.title | split: '|' | first }}</span>
-                        <span class="lang2">{{ product.title | split: '|' | last }}</span>
-                    {% else %}
-                        <span>{{ product.title | split: '|' | first }}</span>
-                    {% endif %}
-                    </h2>
-                    {% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: false, product: product %}
-           
+                    <header
+                        class="product-title product-name {% if collection.previous_product or collection.next_product and settings.display_prev_next_product and collection %}has-btn{% endif %}">
+                        <h2 itemprop="name">
+                            {% if settings.enable_multilang %}
+                            <span class="lang1">{{ product.title | split: '|' | first }}</span>
+                            <span class="lang2">{{ product.title | split: '|' | last }}</span>
+                            {% else %}
+                            <span>{{ product.title | split: '|' | first }}</span>
+                            {% endif %}
+                        </h2>
+                        {% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: false, product: product %}
+
                     </header>
-                  <div class="prices">
+                    <div class="prices">
                         {% if product.compare_at_price > product.price %}
-                            <span class="price on-sale" itemprop="price">{{ product.price | money }}</span>
-                            <span class="compare-price">{{ product.compare_at_price_max | money }}</span>
+                        <span class="price on-sale" itemprop="price">{{ product.price | money }}</span>
+                        <span class="compare-price">{{ product.compare_at_price_max | money }}</span>
                         {% else %}
-                            <span class="price" itemprop="price">{{ product.price | money }}</span>
+                        <span class="price" itemprop="price">{{ product.price | money }}</span>
                         {% endif %}
                     </div>
                 </div>
-                
-              </div>
-        
-                <div class="product-view {% if settings.product_image_border %} grid-item-bsorder {% endif %}">
+
+            </div>
+
+            <div class="product-view {% if settings.product_image_border %} grid-item-bsorder {% endif %}">
                 <div class="wrap-product-image">
                     <div id="product-image-preload">
                         <img src="{{ 'loading.gif' | asset_url }}">
                     </div>
                     {% if product.images.size == 0 %}
-                        <div class="wrap-product-image-big product-photo-container" id="product-anchor">
-                            <img src="{{ '' | product_img_url: 'grande' }}" alt="">
-                        </div>
+                    <div class="wrap-product-image-big product-photo-container" id="product-anchor">
+                        <img src="{{ '' | product_img_url: 'grande' }}" alt="">
+                    </div>
                     {% else %}
-                        <div class="wrap-product-image-big product-photo-container" id="product-anchor">
-                            {% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
-                            <a href="{{ featured_image | img_url: 'original' }}">
-                                <img id="product-featured-image" src="{{ featured_image | img_url: 'grande' }}"
+                    <div class="wrap-product-image-big product-photo-container" id="product-anchor">
+                        {% assign featured_image = product.selected_or_first_available_variant.featured_image | default:
+                        product.featured_image %}
+                        <a href="{{ featured_image | img_url: 'original' }}">
+                            <img id="product-featured-image" src="{{ featured_image | img_url: 'grande' }}"
                                 alt="{{ featured_image.alt | escape }}"
-                                data-zoom-image="{{ featured_image.src | img_url: 'original' }}"/>
-                            </a>
-                        </div>
+                                data-zoom-image="{{ featured_image.src | img_url: 'original' }}" />
+                        </a>
+                    </div>
                     {% endif %}
                     <div id="more-view-carousel" class="wrap-product-image-list owl-carousel owl-theme">
                         {% for image in product.images %}
-                            <div class="inner-image">
-                                <a href="javascript:void(0)"
-                                    data-image="{{ image.src | product_img_url: 'grande' }}"
-                                    data-zoom-image="{{ image.src | product_img_url: 'original' }}">
-                                    <img src="{{ image.src | product_img_url: 'compact' }}"
-                                    alt="{{ image.alt | escape }}">
-                                </a>
-                            </div>
+                        <div class="inner-image">
+                            <a href="javascript:void(0)" data-image="{{ image.src | product_img_url: 'grande' }}"
+                                data-zoom-image="{{ image.src | product_img_url: 'original' }}">
+                                <img src="{{ image.src | product_img_url: 'compact' }}" alt="{{ image.alt | escape }}">
+                            </a>
+                        </div>
                         {% endfor %}
                     </div>
                 </div>
             </div>
             <div class="product-shop">
                 <div class="wrap-product-detail">
-                    <header class="product-title product-name {% if collection.previous_product or collection.next_product and settings.display_prev_next_product and collection %}has-btn{% endif %}">
-                    <h2 itemprop="name">
-                    {% if settings.enable_multilang %}
-                        <span class="lang1">{{ product.title | split: '|' | first }}</span>
-                        <span class="lang2">{{ product.title | split: '|' | last }}</span>
-                    {% else %}
-                        <span>{{ product.title | split: '|' | first }}</span>
-                    {% endif %}
-                    </h2>
-                    {% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: false, product: product %}
-                    </header>
-        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-            <meta itemprop="priceCurrency" content="{{ shop.currency }}">
-            <link itemprop="availability"
-                href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
-                <form action="/cart/add" method="post" enctype="multipart/form-data" id="add-to-cart-form">
-                    <div class="prices">
-                        {% if product.compare_at_price > product.price %}
-                            <span class="price on-sale" itemprop="price">{{ product.price | money }}</span>
-                            <span class="compare-price">{{ product.compare_at_price_max | money }}</span>
-                        {% else %}
-                            <span class="price" itemprop="price">{{ product.price | money }}</span>
-                        {% endif %}
-                    </div>
-                    <div class="variants-products">
-                        {% assign productstyle_index = -1 %}
-                        {% for option in product.options %}
-                            {% if option == "Style" %}
-                                {% assign productstyle_index = forloop.index0 %}
+                    <header
+                        class="product-title product-name {% if collection.previous_product or collection.next_product and settings.display_prev_next_product and collection %}has-btn{% endif %}">
+                        <h2 itemprop="name">
+                            {% if settings.enable_multilang %}
+                            <span class="lang1">{{ product.title | split: '|' | first }}</span>
+                            <span class="lang2">{{ product.title | split: '|' | last }}</span>
+                            {% else %}
+                            <span>{{ product.title | split: '|' | first }}</span>
                             {% endif %}
-                        {% endfor %}
-                        {% if productstyle_index >= 0 %}
-                            <div class="title d-flex justify-content-between align-items-center">
-                                <h4 class="font-weight-lightbold text-capitalize">Products:</h4>
+                        </h2>
+                        {% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: false, product: product %}
+                    </header>
+                    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                        <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+                        <link itemprop="availability"
+                            href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+                        <form action="/cart/add" method="post" enctype="multipart/form-data" id="add-to-cart-form">
+                            <div class="prices">
+                                {% if product.compare_at_price > product.price %}
+                                <span class="price on-sale" itemprop="price">{{ product.price | money }}</span>
+                                <span class="compare-price">{{ product.compare_at_price_max | money }}</span>
+                                {% else %}
+                                <span class="price" itemprop="price">{{ product.price | money }}</span>
+                                {% endif %}
                             </div>
-                        {% endif %}
-                        {% if productstyle_index >= 0 %}
-                            <div class="wrap-select-box">
-                                <select id="select-box-style">
-                                    {% assign values = '' %}
-                                    {% for variant in product.variants %}
+                            <div class="variants-products">
+                                {% assign productstyle_index = -1 %}
+                                {% for option in product.options %}
+                                {% if option == "Style" %}
+                                {% assign productstyle_index = forloop.index0 %}
+                                {% endif %}
+                                {% endfor %}
+                                {% if productstyle_index >= 0 %}
+                                <div class="title d-flex justify-content-between align-items-center">
+                                    <h4 class="font-weight-lightbold text-capitalize">Products:</h4>
+                                </div>
+                                {% endif %}
+                                {% if productstyle_index >= 0 %}
+                                <div class="wrap-select-box">
+                                    <select id="select-box-style">
+                                        {% assign values = '' %}
+                                        {% for variant in product.variants %}
                                         {% assign value = variant.options[productstyle_index] %}
                                         {% unless values contains value %}
                                         {% assign values = values | join: ',' %}
                                         {% assign values = values | append: ',' | append: value %}
                                         {% assign values = values | split: ',' %}
-                                        <option data-id="{{ variant.id  }}" data-url="{{ variant.url }}"{% if forloop.first %} selected{% endif %} value="{{ variant.id }}" data-value="{{ value | handle }}">{{ value }}</option>
-                                    {% endunless %}
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="wrap-rp-img-list">
-                            <div class="rp-img-list d-flex">
-                                {% assign variants_array='' %}
-                                {% for variant in product.variants %}
-                                    {% assign value = variant.options[productstyle_index] %}
-                                    {% unless variants_array contains value %}
-                                    {% assign variants_array = variants_array | join: ',' %}
-                                    {% assign variants_array = variants_array | append: ',' | append: value %}
-                                    {% assign variants_array = variants_array | split: ',' %}
-                                    <div class="inner-rp-img " data-filter="{{ value | handle }}" data-id="{{ variant.id }}">
-                                        <a href="{{ variant.url }}" data-href="{{ variant.url }}">
-                                            <img class="" src="{{ variant.image | img_url }}">
-                                        </a>
+                                        <option data-id="{{ variant.id  }}" data-url="{{ variant.url }}" {% if
+                                            forloop.first %} selected{% endif %} value="{{ variant.id }}"
+                                            data-value="{{ value | handle }}">{{ value }}</option>
+                                        {% endunless %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="wrap-rp-img-list">
+                                    <div class="rp-img-list d-flex">
+                                        {% assign variants_array='' %}
+                                        {% for variant in product.variants %}
+                                        {% assign value = variant.options[productstyle_index] %}
+                                        {% unless variants_array contains value %}
+                                        {% assign variants_array = variants_array | join: ',' %}
+                                        {% assign variants_array = variants_array | append: ',' | append: value %}
+                                        {% assign variants_array = variants_array | split: ',' %}
+                                        <div class="inner-rp-img " data-filter="{{ value | handle }}"
+                                            data-id="{{ variant.id }}">
+                                            <a href="{{ variant.url }}" data-href="{{ variant.url }}">
+                                                <img class="" src="{{ variant.image | img_url }}">
+                                            </a>
+                                        </div>
+                                        {% endunless %}
+                                        {% endfor %}
                                     </div>
-                                {% endunless %}
-                            {% endfor %}
-                        </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div id="product-variants">
+                                {% assign variantCount = product.variants | size %}
+                                {% if product.available %}
+                                {% if variantCount > 1 %}
+                                <select id="product-selectors" name="id" style="display:none">
+                                    {% for variant in product.variants %}
+                                    <option {% if variant==product.selected_or_first_available_variant %}
+                                        selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }}
+                                        - {{ variant.price | money }}</option>
+                                    {% endfor %}
+                                </select>
+                                {% if settings.use_color_swatch %}
+                                {% for option in product.options %}
+                                {% include 'swatch' with option %}
+                                {% endfor %}
+                                {% endif %}
+                                {% else %}
+                                <input type="hidden" name="id" value="{{ product.variants[0].id }}" />
+                                {% endif %}
+                                {% endif %}
+                            </div>
+                            {% include 'size-modal' %}
+                            <div class="product-qty">
+                                {% if product.available %}
+                                <script>
+                                    //Quantity click input
+                                    $(document).ready(function () {
+                                        var qty = $('.count');
+                                        qty.prop('disabled', true);
+                                        $('.minus').addClass('disable');
+                                        function check() {
+                                            if (qty.val() == 1) { $('.minus').addClass('disable'); }
+                                        }
+                                        $(document).on('click', '.plus', function () {
+                                            qty.val(parseInt($('.count').val()) + 1);
+                                            $('.minus').removeClass('disable');
+                                        });
+                                        $(document).on('click', '.minus', function () {
+                                            qty.val(parseInt($('.count').val()) - 1);
+                                            if (qty.val() == 0) {
+                                                qty.val(1);
+                                                $('.minus').addClass('disable');
+                                            }
+                                            check();
+                                        });
+                                    });
+                                </script>
+                                <div class="header"><span class="product-tlt">QTY</span></div>
+                                <label for="quantity" {% if settings.enable_multilang
+                                    %}data-translate="cart.label.quantity" {% endif %}>
+                                    <span id="select-value" class="show-value">1 </span></label>
+                                <div class="qty">
+                                    <span class="minus">-</span>
+                                    <input type="number" class="count" value="1" id="quantity-select" name="quantity"
+                                        min="1" max="20">
+                                    <span class="plus">+</span>
+                                </div>
+                                <input type="hidden" id="quantity" name="quantity" value="1">
+                                <div class="buy-now">
+                                    <input onclick="//pintrk('track', 'addtocart');" type="submit" name="add"
+                                        class="btn" {% if settings.enable_multilang
+                                        %}data-translate="products.product.add_to_cart" {% endif %}
+                                        id="product-add-to-cart" value="{{ 'products.product.add_to_cart' | t }}">
+                                </div>
+                                {% else %}
+                                <div class="buy-now">
+                                    <input type="submit" name="add" class="btn" {% if settings.enable_multilang
+                                        %}data-translate="products.product.unavailable" {% endif %}
+                                        id="product-add-to-cart" disabled buy-now
+                                        value="{{ 'products.product.unavailable' | t }}">
+                                </div>
+                                {% endif %}
+                            </div>
+                            {% capture the_snippet_fave %}{% render 'socialshopwave-widget-fave' %}{% endcapture %}
+                            {% unless the_snippet_fave contains 'Liquid error' %}
+                            {{ the_snippet_fave }}
+                            {% endunless %}
+                            <p class="checkout"><img src="{{ 'twippy_safe_checkout.png' | asset_url }}"></p>
+                        </form>
                     </div>
-                {% endif %}
+                    <div>
+                        <div id="pxu_cst"></div>
+                    </div>
+                    <div id="product-detail" class="product-area">
+                        {{ product.description }}
+                        <p class="twippy-report"><a href="#">Report this item to Twippy</a></p>
+                    </div>
+
+                </div>
             </div>
-            <div id="product-variants">
-                {% assign variantCount = product.variants | size %}
-                {% if product.available %}
-                    {% if variantCount > 1 %}
-                        <select id="product-selectors" name="id" style="display:none">
-                            {% for variant in product.variants %}
-                                <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %}
-                                value="{{ variant.id }}">{{ variant.title }}
-                            - {{ variant.price | money }}</option>
-                        {% endfor %}
-                    </select>
-                    {% if settings.use_color_swatch %}
-                        {% for option in product.options %}
-                            {% include 'swatch' with option %}
-                        {% endfor %}
-                    {% endif %}
-                {% else %}
-                    <input type="hidden" name="id" value="{{ product.variants[0].id }}"/>
-                {% endif %}
-            {% endif %}
         </div>
-        {% include 'size-modal' %}
-        <div class="product-qty">
-            {% if product.available %}
-                <script>
-                //Quantity click input
-                $(document).ready(function(){
-                var qty = $('.count');
-                qty.prop('disabled', true);
-                $('.minus').addClass('disable');
-                function check(){
-                if (qty.val() == 1) {$('.minus').addClass('disable');}
-                }
-                $(document).on('click','.plus',function(){
-                qty.val(parseInt($('.count').val()) + 1 );
-                $('.minus').removeClass('disable');
-                });
-                $(document).on('click','.minus',function(){
-                qty.val(parseInt($('.count').val()) - 1 );
-                if (qty.val() == 0) {
-                qty.val(1);
-                $('.minus').addClass('disable');
-                }
-                check();
-                });
-                });
-                </script>
-          <div class="header"><span class="product-tlt">QTY</span></div>
-                <label for="quantity"
-                       {% if settings.enable_multilang %}data-translate="cart.label.quantity"{% endif %}>
-                    <span id="select-value" class="show-value">1 </span></label>
-                    <div class="qty">
-                        <span class="minus">-</span>
-                        <input type="number" class="count" value="1" id="quantity-select" name="quantity" min="1" max="20">
-                        <span class="plus">+</span>
-                    </div>
-          			<input type="hidden" id="quantity" name="quantity" value="1">
-                    <div class="buy-now">
-                        <input onclick="//pintrk('track', 'addtocart');" type="submit" name="add" class="btn"
-                        {% if settings.enable_multilang %}data-translate="products.product.add_to_cart"{% endif %}
-                        id="product-add-to-cart" value="{{ 'products.product.add_to_cart' | t }}">
-                    </div>
-                {% else %}
-                    <div class="buy-now">
-                        <input type="submit" name="add" class="btn" {% if settings.enable_multilang %}data-translate="products.product.unavailable"{% endif %} id="product-add-to-cart" disabled buy-now value="{{ 'products.product.unavailable' | t }}">
-                    </div>
-                {% endif %}
-            </div>
-        {% capture the_snippet_fave %}{% render 'socialshopwave-widget-fave' %}{% endcapture %}
-        {% unless the_snippet_fave contains 'Liquid error' %}
-        {{ the_snippet_fave }}
-    {% endunless %}
-    <p class="checkout"><img src="{{ 'twippy_safe_checkout.png' | asset_url }}"></p>
-</form>
-</div>
-<div>
-<div id="pxu_cst"></div>
-</div>
-                  <div class="product-area">
-                  <ul class="product-menu">
-                    <li class="activated" data-tab="1">DESCRIPTION</li>
-                    <li data-tab="2">PRODUCTION</li>
-                    <li data-tab="3">SIZE GUIDE</li>
-                  </ul>
-<div class="wrap-product-info">
-  <div class="product-description activated" data-tab="1">{{ product.description }}</div>
-  <div class="product-production" data-tab="2">0% Irish here for the beer, a funny St. Patrick's day shamrock shirt or any day design for those they are not even a wee bit Irish, but really just like to celebrate for the beer. Featuring a green Leprechaun with clover and Ireland flag beer mug. </div>
-  <div class="product-size-guide" data-tab="3"><img src="{{ 'twippy_size_guide.png' | asset_url | 'Size Guide'}}"></div>
-</div>
-                  <p class="twippy-report"><a href="#">Report this item to Twippy</a></p>
-                    </div>
-                  
-</div>
-</div>
-</div>
-</div>
-  <div class="product-review">
-	<!-- <p class="review-tlt">
-		37 Reviews
-		<span class="review-total-stars">
-			<svg fill="none" height="18" viewbox="0 0 19 18" width="19" xmlns="http://www.w3.org/2000/svg">
-				<path d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z" fill="#FFBE40">
-				</path>
-			</svg>
-			<svg fill="none" height="18" viewbox="0 0 19 18" width="19" xmlns="http://www.w3.org/2000/svg">
-				<path d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z" fill="#FFBE40">
-				</path>
-			</svg>
-			<svg fill="none" height="18" viewbox="0 0 19 18" width="19" xmlns="http://www.w3.org/2000/svg">
-				<path d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z" fill="#FFBE40">
-				</path>
-			</svg>
-			<svg fill="none" height="18" viewbox="0 0 19 18" width="19" xmlns="http://www.w3.org/2000/svg">
-				<path d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z" fill="#FFBE40">
-				</path>
-			</svg>
-			<svg fill="none" height="18" viewbox="0 0 19 18" width="19" xmlns="http://www.w3.org/2000/svg">
-				<path d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z" fill="#FFBE40">
-				</path>
-			</svg>
-		</span>
-	</p>
-	<div class="review-item">
-      <div class="review-cnt">
-		<div class="review-l">
-			<p class="review-name">
-				Debbie J.
-				<span>
-					8/26/2020
-				</span>
-			</p>
-			<p class="review-stars">
-				<svg fill="none" height="18" viewbox="0 0 19 18" width="19" xmlns="http://www.w3.org/2000/svg">
-					<path d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z" fill="#FFBE40">
-					</path>
-				</svg>
-				<svg fill="none" height="18" viewbox="0 0 19 18" width="19" xmlns="http://www.w3.org/2000/svg">
-					<path d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z" fill="#FFBE40">
-					</path>
-				</svg>
-				<svg fill="none" height="18" viewbox="0 0 19 18" width="19" xmlns="http://www.w3.org/2000/svg">
-					<path d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z" fill="#FFBE40">
-					</path>
-				</svg>
-				<svg fill="none" height="18" viewbox="0 0 19 18" width="19" xmlns="http://www.w3.org/2000/svg">
-					<path d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z" fill="#FFBE40">
-					</path>
-				</svg>
-				<svg fill="none" height="18" viewbox="0 0 19 18" width="19" xmlns="http://www.w3.org/2000/svg">
-					<path d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z" fill="#FFBE40">
-					</path>
-				</svg>
-			</p>
-			<div class="review-txt">
-				Love it!!  I got so many compliments!!!  Great fit, speedy delivery!!  Like magic it was delivered!!!  Highly recommend!! I am already looking at more to order!!!
-			</div>
-		</div>
-			<ul class="review-img">
-				<li>
-					<img alt="Title" src="//cdn.shopify.com/s/files/1/0279/0178/8263/t/2/assets/twippy_customer_img01.jpg"/>
-				</li>
-				<li>
-					<img alt="Title" src="//cdn.shopify.com/s/files/1/0279/0178/8263/t/2/assets/twippy_customer_img01.jpg"/>
-				</li>
-				<li>
-					<img alt="Title" src="//cdn.shopify.com/s/files/1/0279/0178/8263/t/2/assets/twippy_customer_img01.jpg"/>
-				</li>
-			</ul>
-        </div>
-      <div class="product-purchased">
-				<div class="product-purchased-img">
-					<img alt="name" src="//cdn.shopify.com/s/files/1/0279/0178/8263/t/2/assets/twippy_customer_img01.jpg"/>
-				</div>
-				<div class="product-purchased-info">
-					<p class="product-purchased-tlt">
-						Purchased item:
-					</p>
-					<p class="product-purchased-txt">
-						0% Irish Here For The Beer Funny St. Patrick's Day Drinking
-						Team Hoodie
-					</p>
-				</div>
-			</div>
-	</div>
-    <div class="review-item">
-      <div class="review-cnt">
-		<div class="review-l">
-			<p class="review-name">
-				Debbie J.
-				<span>
-					8/26/2020
-				</span>
-			</p>
-			<p class="review-stars">
-				<svg fill="none" height="18" viewbox="0 0 19 18" width="19" xmlns="http://www.w3.org/2000/svg">
-					<path d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z" fill="#FFBE40">
-					</path>
-				</svg>
-				<svg fill="none" height="18" viewbox="0 0 19 18" width="19" xmlns="http://www.w3.org/2000/svg">
-					<path d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z" fill="#FFBE40">
-					</path>
-				</svg>
-				<svg fill="none" height="18" viewbox="0 0 19 18" width="19" xmlns="http://www.w3.org/2000/svg">
-					<path d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z" fill="#FFBE40">
-					</path>
-				</svg>
-				<svg fill="none" height="18" viewbox="0 0 19 18" width="19" xmlns="http://www.w3.org/2000/svg">
-					<path d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z" fill="#FFBE40">
-					</path>
-				</svg>
-				<svg fill="none" height="18" viewbox="0 0 19 18" width="19" xmlns="http://www.w3.org/2000/svg">
-					<path d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z" fill="#FFBE40">
-					</path>
-				</svg>
-			</p>
-			<div class="review-txt">
-				Love it!!  I got so many compliments!!!  Great fit, speedy delivery!!  Like magic it was delivered!!!  Highly recommend!! I am already looking at more to order!!!
-			</div>
-		</div>
-			<ul class="review-img">
-				<li>
-					<img alt="Title" src="//cdn.shopify.com/s/files/1/0279/0178/8263/t/2/assets/twippy_customer_img01.jpg"/>
-				</li>
-				<li>
-					<img alt="Title" src="//cdn.shopify.com/s/files/1/0279/0178/8263/t/2/assets/twippy_customer_img01.jpg"/>
-				</li>
-				<li>
-					<img alt="Title" src="//cdn.shopify.com/s/files/1/0279/0178/8263/t/2/assets/twippy_customer_img01.jpg"/>
-				</li>
-			</ul>
-        </div>
-      <div class="product-purchased">
-				<div class="product-purchased-img">
-					<img alt="name" src="//cdn.shopify.com/s/files/1/0279/0178/8263/t/2/assets/twippy_customer_img01.jpg"/>
-				</div>
-				<div class="product-purchased-info">
-					<p class="product-purchased-tlt">
-						Purchased item:
-					</p>
-					<p class="product-purchased-txt">
-						0% Irish Here For The Beer Funny St. Patrick's Day Drinking
-						Team Hoodie
-					</p>
-				</div>
-			</div>
-	</div>
-    <div class="review-item">
-      <div class="review-cnt">
-		<div class="review-l">
-			<p class="review-name">
-				Debbie J.
-				<span>
-					8/26/2020
-				</span>
-			</p>
-			<p class="review-stars">
-				<svg fill="none" height="18" viewbox="0 0 19 18" width="19" xmlns="http://www.w3.org/2000/svg">
-					<path d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z" fill="#FFBE40">
-					</path>
-				</svg>
-				<svg fill="none" height="18" viewbox="0 0 19 18" width="19" xmlns="http://www.w3.org/2000/svg">
-					<path d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z" fill="#FFBE40">
-					</path>
-				</svg>
-				<svg fill="none" height="18" viewbox="0 0 19 18" width="19" xmlns="http://www.w3.org/2000/svg">
-					<path d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z" fill="#FFBE40">
-					</path>
-				</svg>
-				<svg fill="none" height="18" viewbox="0 0 19 18" width="19" xmlns="http://www.w3.org/2000/svg">
-					<path d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z" fill="#FFBE40">
-					</path>
-				</svg>
-				<svg fill="none" height="18" viewbox="0 0 19 18" width="19" xmlns="http://www.w3.org/2000/svg">
-					<path d="M8.54894 0.927051C8.8483 0.00574017 10.1517 0.00573993 10.4511 0.927051L11.8574 5.25532C11.9913 5.66734 12.3752 5.9463 12.8085 5.9463H17.3595C18.3282 5.9463 18.731 7.18592 17.9473 7.75532L14.2654 10.4303C13.9149 10.685 13.7683 11.1364 13.9021 11.5484L15.3085 15.8766C15.6078 16.798 14.5533 17.5641 13.7696 16.9947L10.0878 14.3197C9.7373 14.065 9.2627 14.065 8.91221 14.3197L5.23037 16.9947C4.44665 17.5641 3.39217 16.798 3.69153 15.8766L5.09787 11.5484C5.23174 11.1364 5.08508 10.685 4.7346 10.4303L1.05275 7.75532C0.269035 7.18592 0.67181 5.9463 1.64053 5.9463H6.19155C6.62477 5.9463 7.00873 5.66734 7.1426 5.25532L8.54894 0.927051Z" fill="#FFBE40">
-					</path>
-				</svg>
-			</p>
-			<div class="review-txt">
-				Love it!!  I got so many compliments!!!  Great fit, speedy delivery!!  Like magic it was delivered!!!  Highly recommend!! I am already looking at more to order!!!
-			</div>
-		</div>
-			<ul class="review-img">
-				<li>
-					<img alt="Title" src="//cdn.shopify.com/s/files/1/0279/0178/8263/t/2/assets/twippy_customer_img01.jpg"/>
-				</li>
-				<li>
-					<img alt="Title" src="//cdn.shopify.com/s/files/1/0279/0178/8263/t/2/assets/twippy_customer_img01.jpg"/>
-				</li>
-				<li>
-					<img alt="Title" src="//cdn.shopify.com/s/files/1/0279/0178/8263/t/2/assets/twippy_customer_img01.jpg"/>
-				</li>
-			</ul>
-        </div>
-      <div class="product-purchased">
-				<div class="product-purchased-img">
-					<img alt="name" src="//cdn.shopify.com/s/files/1/0279/0178/8263/t/2/assets/twippy_customer_img01.jpg"/>
-				</div>
-				<div class="product-purchased-info">
-					<p class="product-purchased-tlt">
-						Purchased item:
-					</p>
-					<p class="product-purchased-txt">
-						0% Irish Here For The Beer Funny St. Patrick's Day Drinking
-						Team Hoodie
-					</p>
-				</div>
-			</div>
-	</div> -->
-    
-    
-    {% render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: false, product: product %}
-</div>
-<!-- <div class="navigation product-navigation">
-	<div class="navigation-prev">
-		<a href="#">
-			<svg fill="none" height="14" viewbox="0 0 8 14" width="8" xmlns="http://www.w3.org/2000/svg">
-				<path clip-rule="evenodd" d="M7.70711 0.292893C8.09763 0.683417 8.09763 1.31658 7.70711 1.70711L2.41421 7L7.70711 12.2929C8.09763 12.6834 8.09763 13.3166 7.70711 13.7071C7.31658 14.0976 6.68342 14.0976 6.29289 13.7071L0.292893 7.70711C-0.0976311 7.31658 -0.0976311 6.68342 0.292893 6.29289L6.29289 0.292893C6.68342 -0.0976311 7.31658 -0.0976311 7.70711 0.292893Z" fill="#302C2C" fill-rule="evenodd">
-				</path>
-			</svg>
-		</a>
-	</div>
-	<div class="navigation-num">
-		<a href="#">
-			1
-		</a>
-	</div>
-	<div class="navigation-num navigation-current">
-		<a href="#">
-			2
-		</a>
-	</div>
-	<div class="navigation-num">
-		<a href="#">
-			3
-		</a>
-	</div>
-	<div class="navigation-num navigation-noclick">
-		<a href="#">
-			...
-		</a>
-	</div>
-	<div class="navigation-num">
-		<a href="#">
-			15
-		</a>
-	</div>
-	<div class="navigation-next">
-		<a href="#">
-			<svg fill="none" height="14" viewbox="0 0 8 14" width="8" xmlns="http://www.w3.org/2000/svg">
-				<path clip-rule="evenodd" d="M0.292893 0.292893C0.683417 -0.0976311 1.31658 -0.0976311 1.70711 0.292893L7.70711 6.29289C8.09763 6.68342 8.09763 7.31658 7.70711 7.70711L1.70711 13.7071C1.31658 14.0976 0.683417 14.0976 0.292893 13.7071C-0.0976311 13.3166 -0.0976311 12.6834 0.292893 12.2929L5.58579 7L0.292893 1.70711C-0.0976311 1.31658 -0.0976311 0.683417 0.292893 0.292893Z" fill="#302C2C" fill-rule="evenodd">
-				</path>
-			</svg>
-		</a>
-	</div>
-</div> -->
-{%if collection %}
-<div class="relate-product">
-	<p class="idx-tlt">
-		WE THINK YOU'LL LOVE THESE TOO
-	</p>
-	<ul class="product-list">
-        {%assign count = 0 %}
-        {% for product in collection.products%}
-            {%if count < 4%}
-                {%assign count = count | plus: 1 %}
-                <li>
-                    <a href="#">
-                        <span class="sale">
-                            sale
-                            <span>
-                                70%
-                            </span>
+    </div>
+    <div class="product-review">
+        <h1>product review here</h1>
+        {% render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: false, product: product %}
+    </div>
+    {%if collection %}
+    <div class="relate-product">
+        <p class="idx-tlt">
+            WE THINK YOU'LL LOVE THESE TOO
+        </p>
+        <ul class="product-list">
+            {%assign count = 0 %}
+            {% for product in collection.products%}
+            {%if count < 4%} {%assign count=count | plus: 1 %} <li>
+                <a href="#">
+                    <span class="sale">
+                        sale
+                        <span>
+                            70%
                         </span>
-                        <p class="product-img">
-                            <img src="{{ product.featured_image.src | product_img_url: 'large' }}"
-                            alt="{{ product.featured_image.alt | escape }}"/>
-                        </p>
-                        <p class="product-tlt">
-                            {{product.title}}
-                        </p>
-                        <p class="product-price">
+                    </span>
+                    <p class="product-img">
+                        <img src="{{ product.featured_image.src | product_img_url: 'large' }}"
+                            alt="{{ product.featured_image.alt | escape }}" />
+                    </p>
+                    <p class="product-tlt">
+                        {{product.title}}
+                    </p>
+                    <p class="product-price">
+                        {{ product.price | money_without_trailing_zeros }}
+                        <span>
                             {{ product.price | money_without_trailing_zeros }}
-                            <span>
-                                {{ product.price | money_without_trailing_zeros }}
-                            </span>
-                        </p>
-                    </a>
+                        </span>
+                    </p>
+                </a>
                 </li>
-            {%endif%}
-        {%endfor%}
-	</ul>
-</div>
-{%endif%}
-<div class="more-product">
-	<p class="idx-tlt">
-		EXPLORE MORE .... PRODUCT
-	</p>
-  <div class="more-product-scroll">
-	<ul class="more-product-list">
-        {% for i in (1..7) %}
-            {% capture collection %}related_collection_{{ i }}{% endcapture %}
-            {% capture background %}related_collection_{{ i }}_background{% endcapture %}
-            {% if settings[collection] %}
+                {%endif%}
+                {%endfor%}
+        </ul>
+    </div>
+    {%endif%}
+    <div class="more-product">
+        <p class="idx-tlt">
+            EXPLORE MORE .... PRODUCT
+        </p>
+        <div class="more-product-scroll">
+            <ul class="more-product-list">
+                {% for i in (1..7) %}
+                {% capture collection %}related_collection_{{ i }}{% endcapture %}
+                {% capture background %}related_collection_{{ i }}_background{% endcapture %}
+                {% if settings[collection] %}
                 <li>
                     <a href="{{ collections[settings[collection]].title }}">
-                    <p class="more-product-img"  style="background-image:url('{{ settings[background] | img_url }}');background-size: cover;    background-repeat: no-repeat;
+                        <p class="more-product-img" style="background-image:url('{{ settings[background] | img_url }}');background-size: cover;    background-repeat: no-repeat;
                     background-position: center;">
-                    </p>
-                    <p class="more-product-tlt">
-                        {{ collections[settings[collection]].title }}
-                    </p>
+                        </p>
+                        <p class="more-product-tlt">
+                            {{ collections[settings[collection]].title }}
+                        </p>
                     </a>
                 </li>
-            {%endif%}
-            
-        {% endfor %}
-	</ul>
+                {%endif%}
+
+                {% endfor %}
+            </ul>
+        </div>
     </div>
+    {{ 'option_selection.js' | shopify_asset_url | script_tag }}
 </div>
-{{ 'option_selection.js' | shopify_asset_url | script_tag }}
-</div>
-{% capture the_snippet_reviews %}{% render 'socialshopwave-widget-recommends' with 1 %}{% endcapture %}
-{% unless the_snippet_reviews contains 'Liquid error' %}
-{{ the_snippet_reviews }}
-{% endunless %}
-<script>
-  // Button click change content Product Description
-    $(document).ready(function(){
-        var des_btn = $('.product-menu li'),
-            des_data = $('.wrap-product-info>div');
-        $('.product-menu li').on('click', function(){
-            let data = $(this).attr('data-tab');
-            if($(this).hasClass('activated')){
-                return false;
-            }else{
-                $.merge(des_btn,des_data).removeClass('activated');
-                $(this).addClass('activated');
-                $('.wrap-product-info').find('div[data-tab='+data+']').addClass('activated');
-            }
-        });
-    });
-</script>
+
+
 <script>
     //Shopify.Image.preload({{ product.images | json }}, 'grande');
 
@@ -625,12 +349,12 @@
 
         if (variant) {
             if (variant.available) {
-                                                        
+
                 // Anchor when click on color
-                $('.product-color .swatch-content label').on('click', function(){
-                    $('html,body').stop().animate({scrollTop: $('#product-anchor').offset().top},'slow');
-                });  
-                                                        
+                $('.product-color .swatch-content label').on('click', function () {
+                    $('html,body').stop().animate({ scrollTop: $('#product-anchor').offset().top }, 'slow');
+                });
+
                 // We have a valid product variant, so enable the submit button
                 addToCart.removeClass('disabled').removeAttr('disabled').val(window.inventory_text.add_to_cart);
 
@@ -713,98 +437,164 @@
         {% if product.available and product.variants.size > 1 %}
         new Shopify.OptionSelectors('product-selectors', {
             product: {{ product | json }},
-            onVariantSelected: selectCallback,
-            enableHistoryState: true
+        onVariantSelected: selectCallback,
+        enableHistoryState: true
         });
 
-        {% comment %}
-        Use
-        color
-        swatch
-        and
-        linked
-        options(copyright
+    {% comment %}
+    Use
+    color
+    swatch
+    and
+    linked
+    options(copyright
         by
     @carolineschnapp)
-        {% endcomment %}
-        {% if settings.use_color_swatch and product.available and product.options.size > 1 %}
-        Shopify.linkOptionSelectors({{ product | json }});
-        {% endif %}
+    {% endcomment %}
+    {% if settings.use_color_swatch and product.available and product.options.size > 1 %}
+    Shopify.linkOptionSelectors({{ product | json }});
+    {% endif %}
 
-        {% if settings.use_color_swatch != true %}
-        jQuery('.single-option-selector').selectize();
-        jQuery('.selectize-input input').attr("disabled", "disabled");
-        {% endif %}
+    {% if settings.use_color_swatch != true %}
+    jQuery('.single-option-selector').selectize();
+    jQuery('.selectize-input input').attr("disabled", "disabled");
+    {% endif %}
 
-        {% endif %}
+    {% endif %}
 
-        // Add label if only one product option and it isn't 'Title'. Could be 'Size'.
-        {% if product.options.size == 1 and product.options.first != 'Title' %}
-        $('.selector-wrapper:eq(0)').prepend('<label>{{ product.options.first }}</label>');
-        {% endif %}
+    // Add label if only one product option and it isn't 'Title'. Could be 'Size'.
+    {% if product.options.size == 1 and product.options.first != 'Title' %}
+    $('.selector-wrapper:eq(0)').prepend('<label>{{ product.options.first }}</label>');
+    {% endif %}
 
-        // Hide selectors if we only have 1 variant and its title contains 'Default'.
-        {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
-        $('.selector-wrapper').hide();
-        {% endif %}
+    // Hide selectors if we only have 1 variant and its title contains 'Default'.
+    {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+    $('.selector-wrapper').hide();
+    {% endif %}
 
-        // Auto-select first available variant on page load. Otherwise the product looks sold out.
-        {% assign found_one_in_stock = false %}
-        {% for variant in product.variants %}
-        {% if variant.available and found_one_in_stock == false %}
-        {% assign found_one_in_stock = true %}
-        {% for option in product.options %}
-        $('.single-option-selector:eq({{ forloop.index0 }})').val({{ variant.options[forloop.index0] | json }}).trigger('change');
-        {% endfor %}
-        {% endif %}
-        {% endfor %}
+    // Auto-select first available variant on page load. Otherwise the product looks sold out.
+    {% assign found_one_in_stock = false %}
+    {% for variant in product.variants %}
+    {% if variant.available and found_one_in_stock == false %}
+    {% assign found_one_in_stock = true %}
+    {% for option in product.options %}
+    $('.single-option-selector:eq({{ forloop.index0 }})').val({{ variant.options[forloop.index0] | json }}).trigger('change');
+    {% endfor %}
+    {% endif %}
+    {% endfor %}
 
-        {% if settings.display_product_reviews %}
-        var reviewsTimeout = setInterval(function () {
-            if (jQuery(".spr-badge-caption").length > 0) {
-                jQuery(".spr-badge-caption").on('click', function () {
-                    jQuery('html,body').animate({
-                            scrollTop: jQuery(".panel:last").offset().top
-                        },
-                        '400');
-                    jQuery("#collapse-tab4").collapse('show');
-                });
-                clearInterval(reviewsTimeout);
-            }
-        }, 1000);
+    {% if settings.display_product_reviews %}
+    var reviewsTimeout = setInterval(function () {
+        if (jQuery(".spr-badge-caption").length > 0) {
+            jQuery(".spr-badge-caption").on('click', function () {
+                jQuery('html,body').animate({
+                    scrollTop: jQuery(".panel:last").offset().top
+                },
+                    '400');
+                jQuery("#collapse-tab4").collapse('show');
+            });
+            clearInterval(reviewsTimeout);
+        }
+    }, 1000);
 
-        {% endif %}
+    {% endif %}
 
     });
 </script>
-
-    
-
 <script text="text/javascript">
-  var _learnq = _learnq || [];
+    var _learnq = _learnq || [];
 
-  var item = {
-    Name: {{ product.title|json }},
-    ProductID: {{ product.id|json }},
-    Categories: {{ product.collections|map:'title'|json }},
+    var item = {
+        Name: {{ product.title| json }},
+    ProductID: { { product.id | json } },
+    Categories: { { product.collections | map: 'title' | json } },
     ImageURL: "https:{{ product.featured_image.src|img_url:'grande' }}",
-    URL: "{{ shop.secure_url }}{{ product.url }}",
-    Brand: {{ product.vendor|json }},
-    Price: {{ product.price|money|json }},
-    CompareAtPrice: {{ product.compare_at_price_max|money|json }}
+        URL: "{{ shop.secure_url }}{{ product.url }}",
+            Brand: { { product.vendor | json } },
+    Price: { { product.price | money | json } },
+    CompareAtPrice: { { product.compare_at_price_max | money | json } }
   };
 
-  _learnq.push(['track', 'Viewed Product', item]);
-  _learnq.push(['trackViewedItem', {
-    Title: item.Name,
-    ItemId: item.ProductID,
-    Categories: item.Categories,
-    ImageUrl: item.ImageURL,
-    Url: item.URL,
-    Metadata: {
-      Brand: item.Brand,
-      Price: item.Price,
-      CompareAtPrice: item.CompareAtPrice
+    _learnq.push(['track', 'Viewed Product', item]);
+    _learnq.push(['trackViewedItem', {
+        Title: item.Name,
+        ItemId: item.ProductID,
+        Categories: item.Categories,
+        ImageUrl: item.ImageURL,
+        Url: item.URL,
+        Metadata: {
+            Brand: item.Brand,
+            Price: item.Price,
+            CompareAtPrice: item.CompareAtPrice
+        }
+    }]);
+</script>
+
+<script>
+    function createDescriptionTab() {
+        // description apend data
+        // create tab
+        let tabbedPanel = '';
+        tabbedPanel += "<ul class='product-menu'><li class='activated' data-tab='1'>DESCRIPTION</li>";
+
+        let tab_counter = 2
+        $.each($('.product-area h3.heading'), function (key, val) {
+            if (!$(val).text()) { return; }
+            tabbedPanel += "<li data-tab="+tab_counter+">" + $(val).text() + "</li>";
+            tab_counter+=1;
+        });
+        tabbedPanel += "</ul>";
+
+        // original description
+        let des_rex = /^(.+)<\/h3>/;
+        let arrTabText = $('.product-area').html().split('<h3 class="heading">');
+        let textFirstTab = arrTabText[0];
+        let productDescriptionTabbed = "";
+        let arrTabIds = [];
+
+        // split html and save into tab
+        let counter = 2;
+        $.each(arrTabText, function (key, val) {
+            let rex_result = val.trim().match(des_rex);
+            if (!rex_result || !rex_result[1]) { return; }
+            if (rex_result) {
+                let valTab = val.replace(rex_result[0], '');
+                let tabTitle = rex_result[1].trim().replace(/[^a-zA-Z]/g, "").replace('nbsp', '');
+                arrTabIds.push('#' + tabTitle);
+                productDescriptionTabbed += "<div data-tab="+counter+">" + valTab + "</div></div>";
+                counter +=1;
+            }
+        });
+
+        // remainder put back to description
+        productDescriptionTabbed = "<div class='wrap-product-info'><div class='product-description activated' data-tab='1'>" + textFirstTab +"</div>" + productDescriptionTabbed + "</div>";
+        if (productDescriptionTabbed.length > 0) {
+            $('h2.description').hide();
+            $('#product-detail').html(tabbedPanel + productDescriptionTabbed);
+        }
+
+        //Remove tab with empty content: empty htm; with length is 5, so if the text length < 6, we will remove it
+        arrTabIds.forEach(function (section) {
+            if ($(section).text().length < 6) {
+                $(section).remove();
+                $("a[href='" + section + "']").remove();
+            }
+        })
     }
-  }]);
+    $(document).ready(function(){
+        createDescriptionTab();
+        // Button click change content Product Description
+        var des_btn = $('.product-menu li'),
+            des_data = $('.wrap-product-info>div');
+        $('.product-menu li').on('click', function () {
+            let data = $(this).attr('data-tab');
+            if ($(this).hasClass('activated')) {
+                return false;
+            } else {
+                $.merge(des_btn, des_data).removeClass('activated');
+                $(this).addClass('activated');
+                $('.wrap-product-info').find('div[data-tab=' + data + ']').addClass('activated');
+            }
+        });
+    })
 </script>
