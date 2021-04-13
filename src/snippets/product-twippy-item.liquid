@@ -1,81 +1,33 @@
-{% assign on_sale = false %}
-{% if product.compare_at_price_min > product.price_min %}
-{% assign on_sale = true %}
-{% endif %}
-
-{% assign sold_out = true %}
-{% if product.available %}
-{% assign sold_out = false %}
-{% endif %}
-
-{% assign productIndex = forloop.index | minus:1 %}
-{% assign delayTime = settings.time_lazy_load | times : productIndex %}
-
-{% comment %}
-<div class="product product-image">
-  {% capture the_snippet_fave_icon %}{% render 'ssw-widget-faveicon' with product.id %}{% endcapture %}
-  {% unless the_snippet_fave_icon contains 'Liquid error' %}
-  {{ the_snippet_fave_icon }}
-  {% endunless %}    <a href="{{ product.url | within: collection }}">
-  <img src="{{ product.featured_image.src | product_img_url: 'large' }}"
-       alt="{{ product.featured_image.alt | escape }}">
-  </a>
-  <div class="info-product"><a href="{{ product.url | within: collection }}">
-    <h3>{{ product.title }}</h3>
-    {% capture the_snippet_review_avg %}{% render 'ssw-widget-avg-rate-listing', product: product %}{% endcapture %}
-    {% unless the_snippet_review_avg contains 'Liquid error' %}
-    {{ the_snippet_review_avg }}
-    {% endunless %}    
-    <h4>{{ product.price | money_without_trailing_zeros }}</h4>
-    {% comment %}Loop through all the options and find out how many unique options within the variants{% endcomment %}
-    {% assign option_index = 0 %}
-    {% for option in product.options %}
-    {% capture downcased_option %}{{ option | downcase }}{% endcapture %}
-    {% assign option_index = forloop.index0 %}
-    {% assign is_color = false %}
-    {% if downcased_option contains 'color' or downcased_option contains 'colour' %}
-    {% assign is_color = true %}
-    {% endif %}
-    {% assign how_many_options = 0 %}
-    {% assign current_options = '' %}
-    {% for variant in product.variants %}
-    {% if is_color %}
-    {% assign current_option = variant.options[option_index] %}
-    {% unless current_options contains current_option %}
-    {% if how_many_options > 0 %}
-    {% assign current_options = current_options | join: '|' | append: '|' %}
-    {% endif %}
-    {% assign current_options = current_options | append: current_option %}
-    {% assign current_options = current_options | split: '|' | sort %}
-    {% assign how_many_options = current_options | size %}
-    {% endunless %}
-    {% endif %}
-    {% endfor %}
-    {% if is_color %}
-    {% comment %}Output the amount of options for each option. Add an 's' if there is more than one available{% endcomment %}
-    {% unless option == "Title" %}
-    <p class="mb-0 colors">{{ current_options.size }} {{ option }}{% if current_options.size > 1 %}s{% endif %}</p>
-    {% endunless %}
-    {% endif %}
-    {% endfor %}
-    </a></div>
-</div>
-{% endcomment %}
-
+{% assign variant_image_src = product.featured_image.src %}
 <li class="product-image">
-  {% capture the_snippet_fave_icon %}{% render 'ssw-widget-faveicon' with product.id %}{% endcapture %}
-  {% unless the_snippet_fave_icon contains 'Liquid error' %}
-  {{ the_snippet_fave_icon }}
-  {% endunless %}
-  <a href="{{ product.url | within: collection }}">
-    <p class="product-img"><img src="{{ product.featured_image.src | product_img_url: 'large' }}"
+  {% assign color_matched = false %}
+    {% for variant in product.variants %}
+      {% assign variant_color = variant.option2 | downcase %}
+      {% for tag in current_tags %}
+        {%- if tag contains variant_color-%}
+          {% assign color_matched = true %}
+          {% break %}
+        {%- endif -%}
+      {% endfor %}
+    {%- if color_matched -%}
+    {% assign variant_image_src = variant.image.src %}
+      {% break %}
+    {%- endif -%}
+    {% endfor %}
+  <a href="{{ product.url | within: collection }}" title="{{product.title}}">
+    <p class="product-img"><img src="{{ variant_image_src | product_img_url: 'large' }}"
                                 alt="{{ product.featured_image.alt | escape }}"></p>
-    {% capture the_snippet_review_avg %}{% render 'ssw-widget-avg-rate-listing', product: product %}{% endcapture %}
+    {% capture the_snippet_review_avg %}
+    {%comment%}
+    {% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: 'text-align: center', concierge_install: true, product: product %}
+    {%endcomment%}
+    {% endcapture %}
     {% unless the_snippet_review_avg contains 'Liquid error' %}
     {{ the_snippet_review_avg }}
     {% endunless %}  
-    <p class="product-tlt">{{ product.title }}</p>
-    <p class="product-price">{{ product.price | money_without_trailing_zeros }}<!--span>$32.99</span--></p>
+    <p class="product-tlt" >{{ product.title | truncate: 50}} </p>
+    
+    <p class="product-price" >{{ product.price | money_without_trailing_zeros }}<!--span>$32.99</span--></p>
     {% comment %}Loop through all the options and find out how many unique options within the variants{% endcomment %}
     {% assign option_index = 0 %}
     {% for option in product.options %}
@@ -88,6 +40,7 @@
     {% assign how_many_options = 0 %}
     {% assign current_options = '' %}
     {% for variant in product.variants %}
+    
     {% if is_color %}
     {% assign current_option = variant.options[option_index] %}
     {% unless current_options contains current_option %}
@@ -103,7 +56,7 @@
     {% if is_color %}
     {% comment %}Output the amount of options for each option. Add an 's' if there is more than one available{% endcomment %}
     {% unless option == "Title" %}
-    <!--p class="mb-0 colors">{{ current_options.size }} {{ option }}{% if current_options.size > 1 %}s{% endif %}</p-->
+    <!-- <p class="mb-0 colors">{{ current_options.size }} {{ option }}{% if current_options.size > 1 %}s{% endif %}</p> -->
     {% endunless %}
     {% endif %}
     {% endfor %}

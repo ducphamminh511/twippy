@@ -3,7 +3,7 @@
   <ul>
     {% for article in blogs.news.articles limit:3 %}
     <li>
-      <p class="blog-img">{% if article.image %}<img src="{{ article | img_url: 'large' }}">
+      <a href="{{ article.url }}"><p class="blog-img">{% if article.image %}<img src="{{ article | img_url: 'large' }}"></a>
 
         {% else %}
 
@@ -24,7 +24,7 @@
         {% endif %}          
         {% endif %}</p>
       <p class="blog-cate">NEWS</p>
-      <p class="blog-tlt">{{ article.title | strip_html | truncate: 40}}</p>
+      <a href="{{ article.url }}"><p class="blog-tlt">{{ article.title | strip_html | truncate: 40}}</p></a>
       <p class="blog-txt">{{ article.content | strip_html | truncate: 180}}</p>
       <a class="blog-more" href="{{ article.url }}">Read more</a>
     </li>

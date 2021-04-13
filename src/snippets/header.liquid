@@ -98,7 +98,7 @@
   <p class="h-banner">Free shipping for any US orders above 75 $</p>
   <div class="h-top container">
     <label class="menu-icon"><span></span></label>
-    <a class="logo" href="/">{{ 'twippy_logo1.png' | asset_url | img_tag: shop.name }}</a>
+    <a class="logo" href="/">{{ settings.website_logo | img_tag: shop.name }}</a>
     <div class="h-search">
       {% include 'search-bar' %}
     </div>

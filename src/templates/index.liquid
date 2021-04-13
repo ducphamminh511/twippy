@@ -23,9 +23,12 @@
 </div>
 {%endcomment%}
 <div class="mainvisual">
-  
-  <ul class="idx-slider">
-    
+  <ul class="product-shop-sp idx-slider">
+    <li class=""><a href="{{settings.top-banner-link-1}}" style="background-image:url('{{ settings.top-banner-home-1-mobile | img_url: 'master' }}')"​​​​​​></a></li>
+    <li class=""><a href="{{settings.top-banner-link-2}}" style="background-image:url('{{ settings.top-banner-home-2-mobile | img_url: 'master' }}')"></a></li>
+    <li class=""><a href="{{settings.top-banner-link-3}}" style="background-image:url('{{ settings.top-banner-home-3-mobile | img_url: 'master' }}')"></a></li>
+  </ul>
+  <ul class="pc idx-slider">
     <li><a href="{{settings.top-banner-link-1}}" style="background-image:url('{{ settings.top-banner-home-1 | img_url: 'master' }}')"​​​​​​></a></li>
     <li><a href="{{settings.top-banner-link-2}}" style="background-image:url('{{ settings.top-banner-home-2 | img_url: 'master' }}')"></a></li>
     <li><a href="{{settings.top-banner-link-3}}" style="background-image:url('{{ settings.top-banner-home-3 | img_url: 'master' }}')"></a></li>
@@ -85,7 +88,7 @@
         {% capture collection %}category_collection_{{ i }}{% endcapture %}
         {% capture background %}category_collection_{{ i }}_background{% endcapture %}
         {% if settings[collection] %}
-        <li><a href="{{collections[settings[collection]].url}}" style="background-image:url('{{ settings[background] | img_url: 'master' }}')">{{ collections[settings[collection]].title }}</a></li>
+        <li><a href="{{collections[settings[collection]].url}}" style="background-image:url('{{ settings[background] | img_url: 'master' }}'); background-position: center; background-size: contain;">{{ collections[settings[collection]].title }}</a></li>
         {%endif%}
         {% endfor %}
       </ul>
