@@ -1,19 +1,25 @@
 {% assign variant_image_src = product.featured_image.src %}
 <li class="product-image">
   {% assign color_matched = false %}
-    {% for variant in product.variants %}
-      {% assign variant_color = variant.option2 | downcase %}
+  {% for variant in product.variants %}
+    {% assign variant_color = variant.option2 | downcase %}
+    {%- if current_tags -%}
       {% for tag in current_tags %}
         {%- if tag contains variant_color-%}
           {% assign color_matched = true %}
           {% break %}
         {%- endif -%}
       {% endfor %}
+    {%- elsif collection.handle contains variant_color -%}
+        {% assign color_matched = true %}
+    {%- else -%}
+      
+    {%- endif -%}
     {%- if color_matched -%}
-    {% assign variant_image_src = variant.image.src %}
+      {% assign variant_image_src = variant.image.src %}
       {% break %}
     {%- endif -%}
-    {% endfor %}
+  {% endfor %}
   <a href="{{ product.url | within: collection }}" title="{{product.title}}">
     <p class="product-img"><img src="{{ variant_image_src | product_img_url: 'large' }}"
                                 alt="{{ product.featured_image.alt | escape }}"></p>
