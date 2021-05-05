@@ -559,7 +559,6 @@
 
   .under-mainvisual {
     height: 320px;
-    background-image: url(https://cdn.shopify.com/s/files/1/0279/0178/8263/t/2/assets/twippy_under_mainvisual_sp.jpg);
     margin-bottom: 35px;
   }
   .under-h2 {
@@ -691,7 +690,7 @@
     width: 100%;
   }
   .wrap-product-image-big {
-    height: 300px;
+    height: 100%;
     overflow: hidden;
   }
   .zoomWrapper {

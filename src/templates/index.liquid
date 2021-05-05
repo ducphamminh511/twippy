@@ -87,7 +87,7 @@
         {%- for i in (1..10) -%}
         {% capture collection %}category_collection_{{ i }}{% endcapture %}
         {% capture background %}category_collection_{{ i }}_background{% endcapture %}
-        {% if settings[collection] %}
+        {% if settings[background] %}
         <li><a href="{{collections[settings[collection]].url}}" style="background-image:url('{{ settings[background] | img_url: 'master' }}'); background-position: center; background-size: contain;">{{ collections[settings[collection]].title }}</a></li>
         {%endif%}
         {% endfor %}

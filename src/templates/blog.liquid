@@ -9,104 +9,50 @@ Don't forget to close the tag after your loop.
 This template is also used for listing out articles of a specific tag.
 You can change layouts or styles by checking if current_tags is true.
 {% endcomment %}
-
+<div class="mainvisual" style="height: 400px !important;">
+  <ul class="product-shop-sp idx-slider">
+    <li class=""><a href="{{settings.blog_banner_1_link}}" style="background-image:url('{{ settings.blog_banner_1_mobile | img_url: 'master' }}')"​​​​​​></a></li>
+    <li class=""><a href="{{settings.blog_banner_2_link}}" style="background-image:url('{{ settings.blog_banner_2_mobile | img_url: 'master' }}')"></a></li>
+    <li class=""><a href="{{settings.blog_banner_3_link}}" style="background-image:url('{{ settings.blog_banner_3_mobile | img_url: 'master' }}')"></a></li>
+  </ul>
+  <ul class="pc idx-slider">
+    <li><a href="{{settings.blog_banner_1_link}}" style="background-image:url('{{ settings.blog_banner_1 | img_url: 'master' }}')"​​​​​​></a></li>
+    <li><a href="{{settings.blog_banner_2_link}}" style="background-image:url('{{ settings.blog_banner_2 | img_url: 'master' }}')"></a></li>
+    <li><a href="{{settings.blog_banner_3_link}}" style="background-image:url('{{ settings.blog_banner_3 | img_url: 'master' }}')"></a></li>
+  </ul>
+</div>
 {% include 'breadcrumb' %}
 
-{% if settings.display_sidebar_blog_page %}
-<div class="row">
-  {% include 'blog_sidebar' %}
-  {% endif %}
+<div class="blog container">
+  <ul>
+    {% for article in blogs.news.articles %}
+    <li>
+      <a href="{{ article.url }}"><p class="blog-img">{% if article.image %}<img src="{{ article | img_url: 'large' }}"></a>
 
-  {% if settings.display_sidebar_blog_page %}<div class="col-xs-9 col-main">{% endif %}
-    <div class="content-blog">
-      {% if current_tags %}
-      {% if settings.enable_multilang %}
-      <h1 class="lang1">{{ blog.title | split: '|' | first | link_to: blog.url }} &raquo; {{ current_tags.first }}</h1>
-      <h1 class="lang2">{{ blog.title | split: '|' | last | link_to: blog.url }} &raquo; {{ current_tags.first }}</h1>
-      {% else %}
-      <h1>{{ blog.title | split: '|' | first | link_to: blog.url }} &raquo; {{ current_tags.first }}</h1>    
-      {% endif %}
-      {% else %}
-      {% if settings.enable_multilang %}
-      <h1 class="lang1">{{ blog.title | split: '|' | first }}</h1>
-      <h1 class="lang2">{{ blog.title | split: '|' | last }}</h1>
-      {%else %}
-      <h1>{{ blog.title | split: '|' | first }}</h1>
-      {% endif %}
-      {% endif %}
-      {% comment %}
-      Loop through each article in your blog. This is limited to what you set for pagination above.
+        {% else %}
 
-      For more info on article liquid tags:
-      - http://docs.shopify.com/themes/liquid-variables/article
-      {% endcomment %}
-
-      <ul class="list-blog">
-        {% for article in blog.articles %}
-        <li>
-          <h3>
-            <a href="{{ article.url }}">
-              {% if settings.enable_multilang %}
-              <span class="lang1">{{ article.title | split: '|' | first }}</span>
-              <span class="lang2">{{ article.title | split: '|' | last }}</span>
-              {% else %}
-              {{ article.title | split: '|' | first }}
-              {% endif %}
-            </a>
-          </h3>
-
-          <p class="blog_author">
-            {% comment %}
-            Don't be fooled, the ? in comments_enabled? is part of the liquid tag.
-            {% endcomment %}
-            {% if blog.comments_enabled? %}
-            <a href="{{ article.url }}#comments" {% if settings.enable_multilang %}data-translate="blogs.comments.comments_with_count|count:{{article.comments_count}}"{%endif%}>
-              {{ 'blogs.comments.comments_with_count' | t: count: article.comments_count }}
-            </a><span class="separator">/</span>
-            {% endif %}
-
-            {% capture date %}<time datetime='{{ article.published_at | date: '%Y-%m-%d' }}'>{{ article.published_at | date: '%b %d, %Y' }}</time>{% endcapture %}
-            {% capture author %}{{ article.author }}{% endcapture %}
-            <span class="blog_author" {% if settings.enable_multilang %}data-translate="blogs.article.author_on_date_html|date:{{date}},author:{{author}}" translate-item="blog-date-author"{%endif%}>
-              {{ 'blogs.article.author_on_date_html' | t: date: date, author: author }}        
-            </span>
-          </p> 
-
-          {% comment %}
-          Add a surrounding div with class 'rte' to anything that will come from the rich text editor.
-          Since this is just a listing page, you can either use the excerpt or truncate the full article.
-          {% endcomment %}
-          {% if settings.enable_multilang %}
-          <div class="des lang1">{{ article.content | split:"[lang2]" | first | split:"|" |first}}</div>
-          <div class="des lang2">{{ article.content | split:"[lang2]" | last | split:"|" |last }}</div>
-          {% else %}
-          <div class="des">{{ article.content | split:"[lang2]" | first | split:"|" |first}}</div>
-          {% endif %}
-
-          {% comment %}
-          Show off meta information like number of comments and tags.
-          {% endcomment %}
-
-          <p class="button">
-            <a href="{{ article.url }}" {% if settings.enable_multilang %}data-translate="blogs.article.read_more"{%endif%}>{{ 'blogs.article.read_more' | t }}</a>
-          </p>
-
-          <ul class="user-tags">
-            {% include 'tags-article' %}
-          </ul>
-        </li>
-
+        {% assign hero_image = '' %}
+        {% assign html_tags = article.excerpt_or_content | split: '<' %}
+        {% for html_tag in html_tags %}
+        {% assign img_check = html_tag | slice: 0,3 %}
+        {% if img_check == 'img' %}
+        {% assign img_tag = html_tag | split: '>' %}
+        {% assign hero_image = '<' | append: img_tag.first | append: '>' %}
+        {% break %}
+        {% endif %}
         {% endfor %}
-      </ul>
 
-      {% if paginate.pages > 1 %}
-      <div class="text-center">
-        {% include 'pagination' %}
-      </div>
-      {% endif %}
-    </div>
-  {% if settings.display_sidebar_blog_page %}
-  </div>
+        {% if hero_image.size > 0 %}{{ hero_image }}
+        {%else%}
+        {{ 'twippy_logo1.png' | asset_url | img_tag: shop.name }}
+        {% endif %}          
+        {% endif %}</p>
+      <p class="blog-cate">NEWS</p>
+      <a href="{{ article.url }}"><p class="blog-tlt">{{ article.title | strip_html | truncate: 40}}</p></a>
+      <p class="blog-txt">{{ article.content | strip_html | truncate: 180}}</p>
+      <a class="blog-more" href="{{ article.url }}">Read more</a>
+    </li>
+    {% endfor %}
+  </ul>
 </div>
-{% endif %}
 {% endpaginate %}

@@ -8,11 +8,11 @@
     }
 
     .fade_text {
-        bottom: 20px;
-        position: absolute;
-        width: 600px;
-        height: 70px;
-        z-index: 9999;
+        bottom: 0;
+    position: absolute;
+    width: 600px;
+    height: 95px;
+    z-index: 9999;
         background: url({{ 'fade-text-light.png' | asset_url }}) transparent no-repeat;
     }
 
@@ -21,6 +21,7 @@
         overflow: hidden;
         text-decoration: underline;
         position: absolute;
+        z-index: 10000;
         bottom: 0;
     }
 

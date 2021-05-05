@@ -1,37 +1,69 @@
-{% comment %}
-  This snippet gives you a grid layout for each search result.
-
-  It is encouraged to only use this approach for product results,
-  as page results don't look great in a grid without a featured image.
-
-  To use this grid layout, change the grid_results variable
-  in search.liquid to true.
-{% endcomment %}
-
-<div class="grid-item search-result">
-  {% if item.featured_image %}
-  <a href="{{ item.url }}"  title="{{ item.title | escape }}">
-    {{ item.featured_image.src | product_img_url: 'medium' | img_tag: item.featured_image.alt }}
-  </a>
-  {% endif %}
-  
-  <h5>{{ item.title | link_to: item.url }}</h5>
-  
-  <h6>
-    {% if item.compare_at_price > item.price %}
-    <span class="on-sale" itemprop="price">
-      {{ item.price | money }}
-    </span>
-    <small>
-      <span {% if settings.enable_multilang %}data-translate="products.product.compare_at"{% endif %}>
-        {{ 'products.product.compare_at' | t }}
-      </span>
-      {{ item.compare_at_price_max | money }}
-    </small>
-    {% else %}
-    <span itemprop="price">
-      {{ item.price | money }}
-    </span>
+{% assign variant_image_src = product.featured_image.src %}
+<li class="product-image">
+  {% assign color_matched = false %}
+  {% for variant in product.variants %}
+    {% assign variant_color = variant.option2 | downcase %}
+    {%- if current_tags -%}
+      {% for tag in current_tags %}
+        {%- if tag contains variant_color-%}
+          {% assign color_matched = true %}
+          {% break %}
+        {%- endif -%}
+      {% endfor %}
+    {%- elsif collection.handle contains variant_color -%}
+        {% assign color_matched = true %}
+    {%- else -%}
+      
+    {%- endif -%}
+    {%- if color_matched -%}
+      {% assign variant_image_src = variant.image.src %}
+      {% break %}
+    {%- endif -%}
+  {% endfor %}
+  <a href="{{ product.url | within: collection }}" title="{{product.title}}">
+    <p class="product-img"><img src="{{ variant_image_src | product_img_url: 'large' }}"
+                                alt="{{ product.featured_image.alt | escape }}"></p>
+    {% capture the_snippet_review_avg %}
+    {%comment%}
+    {% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: 'text-align: center', concierge_install: true, product: product %}
+    {%endcomment%}
+    {% endcapture %}
+    {% unless the_snippet_review_avg contains 'Liquid error' %}
+    {{ the_snippet_review_avg }}
+    {% endunless %}  
+    <p class="product-tlt" >{{ product.title | truncate: 50}} </p>
+    
+    <p class="product-price" >{{ product.price | money_without_trailing_zeros }}<!--span>$32.99</span--></p>
+    {% comment %}Loop through all the options and find out how many unique options within the variants{% endcomment %}
+    {% assign option_index = 0 %}
+    {% for option in product.options %}
+    {% capture downcased_option %}{{ option | downcase }}{% endcapture %}
+    {% assign option_index = forloop.index0 %}
+    {% assign is_color = false %}
+    {% if downcased_option contains 'color' or downcased_option contains 'colour' %}
+    {% assign is_color = true %}
     {% endif %}
-  </h6>
-</div>
+    {% assign how_many_options = 0 %}
+    {% assign current_options = '' %}
+    {% for variant in product.variants %}
+    
+    {% if is_color %}
+    {% assign current_option = variant.options[option_index] %}
+    {% unless current_options contains current_option %}
+    {% if how_many_options > 0 %}
+    {% assign current_options = current_options | join: '|' | append: '|' %}
+    {% endif %}
+    {% assign current_options = current_options | append: current_option %}
+    {% assign current_options = current_options | split: '|' | sort %}
+    {% assign how_many_options = current_options | size %}
+    {% endunless %}
+    {% endif %}
+    {% endfor %}
+    {% if is_color %}
+    {% comment %}Output the amount of options for each option. Add an 's' if there is more than one available{% endcomment %}
+    {% unless option == "Title" %}
+    <!-- <p class="mb-0 colors">{{ current_options.size }} {{ option }}{% if current_options.size > 1 %}s{% endif %}</p> -->
+    {% endunless %}
+    {% endif %}
+    {% endfor %}
+  </a></li>
