@@ -1,7 +1,7 @@
 
-<div class="container">
+<div class="container" style="padding-top: 50px;">
   {% include 'breadcrumb' %}
-  <header class="page-header">
+  <header class="page-header" style="padding-bottom: 20px;">
     {% if settings.enable_multilang %}
     <h2 class="lang1">{{ page.title | split: '|' | first }}</h2>
     <h2 class="lang2">{{ page.title | split: '|' | last }}</h2>

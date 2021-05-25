@@ -147,6 +147,7 @@ address {
     font-style: normal;
     line-height: 1;
 }
+
 .clear {
     clear: both;
 }
@@ -1751,6 +1752,10 @@ select#sort > option {
     position: relative;
     text-align: center;
     height: 600px;
+    margin-bottom: 16px;
+}
+.wrap-product-image-list > .owl-stage-outer > .owl-stage > .owl-item{
+    text-align: center;
 }
 .wrap-product-image-big > a {
     display: block;
@@ -1777,7 +1782,7 @@ select#sort > option {
     margin-bottom: 10px;
 }
 .inner-image {
-    width: 150px;
+    width: 105px;
 }
 .zoomWrapper > div {
     width: 100% !important;

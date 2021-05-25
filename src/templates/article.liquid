@@ -1,72 +1,5 @@
 
-<style>
-  .article-banner{
-    position: relative;
-    z-index: 1;
-    height: 400px;
-    margin-bottom: 60px;
-    background-size: cover !important;
-    background-position-y: center !important;
-    
-  }
-  .article-banner::before{
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    z-index: -1;
-    background: #121212;
-    opacity: 0.5;
-  }
-  .article-banner > .container{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      height: 100%;
-  }
-  .article-title{
-    font-weight: bold;
-    font-size: 36px;
-    line-height: 44px;
-    text-align: center;
-    color: #fff;
-    text-transform: uppercase;
-  }
-  .related-blog-img{
-    height: 106px;
-    width: 250px;
-    border-radius: 10px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #f7f7f7;
-  }
-  .related-blog-img > img{
-    max-height: 106px;
-  }
-  .related-list{
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .related-item{
-    width: 250px !important;
-    margin: 10px
-  }
-  .related-heading{
-    font-family: Inter;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 24px;
-    letter-spacing: 0em;
-    text-align: left;
-    margin-bottom: 10px;
-  }
-</style>
+{{ 'blog-styles.css' | asset_url | stylesheet_tag }}
 <div class="article-banner" style="background: url({{ article.image.src | img_url: '200px' }}) ">
   <div class="container">
     <h2 class="article-title">{{article.title}}</h2>
@@ -76,17 +9,21 @@
 {% include 'breadcrumb' %}
 
 <div class="container">
-  <p>{{article.excerpt}}</p>
-  {{article.content}}
-  <p>{{article.author}}</p>
-  <p>Tagged as 
-    {% for tag in article.tags %}
-        {{ tag }},
-    {% endfor %}
-  </p>
-  <h1 class="related-heading">Related blogs</h1>
-  <ul class="related-list" id="related_blog">
-  </ul>
+  <div class="article-content">
+    <p>{{article.excerpt}}</p>
+    {{article.content}}
+    <p>{{article.author}}</p>
+    <p>Tagged as 
+      {% for tag in article.tags %}
+          {{ tag }},
+      {% endfor %}
+    </p>
+    <h1 class="related-heading">Related blogs</h1>
+    <ul class="related-list" id="related_blog">
+    </ul>
+  </div>
+  
+  
   
 {% capture all_the_tags %}{% for tag in article.tags %}{{ tag }} {% endfor %}{% endcapture %}
 {% assign current = article.id %}

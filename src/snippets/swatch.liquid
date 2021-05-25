@@ -69,7 +69,8 @@
                                 <img class="crossed-out" src="{{ 'soldout.png' | asset_url }}" />
                             </label>
                         {% else %}
-                            <label for="swatch-{{ option_index }}-{{ value | handle }}">
+                            <label for="swatch-{{ option_index }}-{{ value | handle }}" {% if value.size > 3%}style="border-radius: 10%;"{% endif %} 
+                                {% if value.size > 7%}style="font-size: 12px;"{% endif %}>
                                 {{ value }}
                                 <img class="crossed-out" src="{{ 'soldout.png' | asset_url }}" />
                             </label>

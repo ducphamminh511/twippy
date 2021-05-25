@@ -93,7 +93,7 @@
                         <div class="inner-image">
                             <a href="javascript:void(0)" data-image="{{ image.src | product_img_url: 'grande' }}"
                                 data-zoom-image="{{ image.src | product_img_url: 'original' }}">
-                                <img src="{{ image.src | product_img_url: 'compact' }}" alt="{{ image.alt | escape }}">
+                                <img src="{{ image.src | product_img_url: 'small' }}" alt="{{ image.alt | escape }}">
                             </a>
                         </div>
                         {% endfor %}
