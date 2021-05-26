@@ -1,6 +1,6 @@
 
 {{ 'blog-styles.css' | asset_url | stylesheet_tag }}
-<div class="article-banner" style="background: url({{ article.image.src | img_url: '200px' }}) ">
+<div class="article-banner" style="background: url({{ article.image.src | img_url: 'master' }}) ">
   <div class="container">
     <h2 class="article-title">{{article.title}}</h2>
   </div>

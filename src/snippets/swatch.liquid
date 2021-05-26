@@ -69,16 +69,26 @@
                                 <img class="crossed-out" src="{{ 'soldout.png' | asset_url }}" />
                             </label>
                         {% else %}
-                            <label for="swatch-{{ option_index }}-{{ value | handle }}" {% if value.size > 3%}style="border-radius: 10%;"{% endif %} 
-                                {% if value.size > 7%}style="font-size: 12px;"{% endif %}>
+                        
+                        <button  class="size_option {% if forloop.first %} selected {% endif %}"  type="button"  {% if value.size > 3%}style="border-radius: 10%;"{% endif %} 
+                            {% if value.size > 7%}style="font-size: 12px;"{% endif %}>
+                            
+                            <label for="swatch-{{ option_index }}-{{ value | handle }}">
                                 {{ value }}
-                                <img class="crossed-out" src="{{ 'soldout.png' | asset_url }}" />
                             </label>
+                            <img class="crossed-out" src="{{ 'soldout.png' | asset_url }}" />
+                        </button>
+                            
                         {% endif %}
                     </div>
                     {% endunless %}
                     {% if variant.available %}
                     <script>
+                        $('.size_option').on('click', function(){
+                            console.log('abc');
+                            $('.selected').removeClass('selected');
+                            $(this).addClass("selected");
+                        })
                         jQuery('.swatch[data-option-index="{{ option_index }}"] .{{ value | handle }}').removeClass('soldout').addClass('available').find(':radio').removeAttr('disabled');
                     </script>
                     {% endif %}
